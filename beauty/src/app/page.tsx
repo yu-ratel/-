@@ -1,7 +1,5 @@
-export default function Home() {
-  return (
-    <main>
-      <div>beauty</div>
-    </main>
-  );
+import Home from '@/containers/home';
+
+export default function HomePage() {
+  return <Home />;
 }

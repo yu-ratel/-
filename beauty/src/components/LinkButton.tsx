@@ -3,11 +3,12 @@ import Link from 'next/link';
 interface Props {
   children: React.ReactNode;
   href: string;
+  className?: string;
 }
 
-const LinkButton = ({ children, href }: Props) => {
+const LinkButton = ({ children, href, className }: Props) => {
   return (
-    <Link className="m-4" href={href}>
+    <Link className={className} href={href}>
       {children}
     </Link>
   );
