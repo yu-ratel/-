@@ -14,7 +14,7 @@ const Home = () => {
         </figure>
         <LinkButton
           className="relative bottom-36 h-16  w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl"
-          href="/forme"
+          href="/for-me"
         >
           for me
         </LinkButton>
