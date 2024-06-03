@@ -15,6 +15,7 @@
     "noUnusedLocals": true, //쓰지않는 지역변수 있으면 에러내기
     "noUnusedParameters": true, //쓰지않는 파라미터 있으면 에러내기
     "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
+    "noImplicitAny": true, //타입이 명시되지 않은 변수의 암묵적인 any 경고
     "plugins": [
       {
         "name": "next"
