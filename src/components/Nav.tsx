@@ -6,7 +6,7 @@ const Nav = () => {
       <LinkButton href="/" className="m-6">
         아름다움
       </LinkButton>
-      <LinkButton href="/login" className="m-6">
+      <LinkButton href="/auth" className="m-6">
         로그인
       </LinkButton>
     </nav>
