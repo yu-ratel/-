@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 
 const page = () => {
   //추후 타 플랫폼 추가를 위해 일단은 kakao default
+  const supabase = createClient();
+
   const kakaoLogin = async () => {
-    const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
@@ -15,11 +16,23 @@ const page = () => {
     });
   };
 
-  useEffect(() => {
-    kakaoLogin();
-  }, []);
+  const logout = async () => {
+    await supabase.auth.signOut();
+    window.location.href = '/';
+  };
 
-  return <div>로그인중입니다.</div>;
+  const handler = async () => {
+    const result = await supabase.auth.getUser();
+
+    if (result?.data?.user) logout();
+    else kakaoLogin();
+  };
+
+  useEffect(() => {
+    handler();
+  }, [supabase]);
+
+  return <div>기다려주세요~</div>;
 };
 
 export default page;
