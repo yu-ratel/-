@@ -4,4 +4,5 @@
 
 body {
   background-color: theme('colors.braun');
+  height: 100vh;
 }

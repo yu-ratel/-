@@ -23,13 +23,18 @@ const Nav = () => {
   }, [supabase]);
 
   return (
-    <nav className="flex justify-between">
+    <nav className="flex h-[10%] justify-between">
       <LinkButton href="/" className="m-6">
         아름다움
       </LinkButton>
-      <LinkButton href={`/auth?${isUser}`} className="m-6">
-        {loginText}
-      </LinkButton>
+      <div className="m-6">
+        <LinkButton href="/board" className="m-6">
+          게시판
+        </LinkButton>
+        <LinkButton href={`/auth?${isUser}`} className="m-6">
+          {loginText}
+        </LinkButton>
+      </div>
     </nav>
   );
 };
