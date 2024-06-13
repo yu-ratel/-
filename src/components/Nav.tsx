@@ -28,7 +28,7 @@ const Nav = () => {
         아름다움
       </LinkButton>
       <div className="m-6">
-        <LinkButton href="/board" className="m-6">
+        <LinkButton href="/board/1" className="m-6">
           게시판
         </LinkButton>
         <LinkButton href={`/auth?${isUser}`} className="m-6">

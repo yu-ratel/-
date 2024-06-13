@@ -1,6 +1,15 @@
-import ListData from './dummy';
+import Pagination from '@/components/Pagination';
+import { Database } from '@/types/supabase';
 
-const Board = () => {
+type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
+
+type Props = {
+  data: BoardDto[];
+  totalCount: number;
+  limit: number;
+};
+
+const Board = ({ data, totalCount, limit }: Props) => {
   const titles = ['번호', '제목', '글쓴이', '작성일'];
   return (
     <main className="h-[80%]">
@@ -11,19 +20,19 @@ const Board = () => {
             return <div key={idx}>{title}</div>;
           })}
         </div>
-        {ListData.map((data, idx) => {
+        {data.map((item, idx) => {
           return (
             <div key={idx} className="flex text-center *:my-1.5 *:w-[25%]">
-              <div>{data.id}</div>
-              <div>{data.title}</div>
-              <div>{data.order}</div>
-              <div>{data.time}</div>
+              <div>{idx + 1}</div>
+              <div>{item.question}</div>
+              <div>{item.replie}</div>
+              <div>{item.updated_at}</div>
             </div>
           );
         })}
       </section>
       <footer>
-        <div className="text-center">페이지네이션</div>
+        <Pagination totalCount={totalCount} limit={limit}/>
       </footer>
     </main>
   );
