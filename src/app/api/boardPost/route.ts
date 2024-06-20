@@ -13,7 +13,11 @@ export const GET = async (request: Request) => {
   const totalCount = await supabase
     .from('user_replies_ris')
     .select('*', { count: 'exact', head: true });
-  const result = await supabase.from('user_replies_ris').select('*').range(startNum, endNum);
+  const result = await supabase
+    .from('user_replies_ris')
+    .select('*')
+    .order('id', { ascending: true })
+    .range(startNum, endNum);
 
   return NextResponse.json({ totalCount: totalCount.count, result, limit });
 };

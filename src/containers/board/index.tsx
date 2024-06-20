@@ -1,5 +1,6 @@
 import Pagination from '@/components/Pagination';
 import { Database } from '@/types/supabase';
+import { formatStrDate } from '@/utils/formatStrDate';
 
 type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
 
@@ -11,6 +12,7 @@ type Props = {
 
 const Board = ({ data, totalCount, limit }: Props) => {
   const titles = ['번호', '제목', '글쓴이', '작성일'];
+
   return (
     <main className="h-[80%]">
       <h1 className="text-center text-4xl text-white">우리들의 이야기</h1>
@@ -23,16 +25,16 @@ const Board = ({ data, totalCount, limit }: Props) => {
         {data.map((item, idx) => {
           return (
             <div key={idx} className="flex text-center *:my-1.5 *:w-[25%]">
-              <div>{idx + 1}</div>
+              <div>{item.id}</div>
               <div>{item.question}</div>
-              <div>{item.replie}</div>
-              <div>{item.updated_at}</div>
+              <div>{item.nickname}</div>
+              <div>{formatStrDate(item.updated_at)}</div>
             </div>
           );
         })}
       </section>
       <footer>
-        <Pagination totalCount={totalCount} limit={limit}/>
+        <Pagination totalCount={totalCount} limit={limit} />
       </footer>
     </main>
   );
