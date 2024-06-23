@@ -1,26 +1,9 @@
-'use client';
-
-import { createClient } from '@/lib/supabase/client';
-import { useEffect, useState } from 'react';
+import { headers } from 'next/headers';
 import LinkButton from './LinkButton';
 
 const Nav = () => {
-  const [isUser, setIsUser] = useState<boolean>(false);
-  const [loginText, setLoginText] = useState<string>('로그인');
-  const supabase = createClient();
-
-  const userInfo = async () => {
-    const result = await supabase.auth.getUser();
-
-    if (result?.data?.user) {
-      setIsUser(true);
-      setLoginText('로그아웃');
-    }
-  };
-
-  useEffect(() => {
-    userInfo();
-  }, [supabase]);
+  const isUser = headers().get('isUser') === 'true' ? true : false;
+  const loginText = isUser ? '로그아웃' : '로그인';
 
   return (
     <nav className="flex h-[10%] justify-between">
