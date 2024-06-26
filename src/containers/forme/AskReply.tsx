@@ -1,11 +1,11 @@
 'use client';
 
-import FormatToday from '@/components/FormatToday';
 import { useState } from 'react';
 import AskList from './AskList';
+import { formatToday } from '@/utils/formatDate';
 
 const AskReply = () => {
-  const today = FormatToday();
+  const today = formatToday();
   const [text, setText] = useState('질문을 선택해주세요!');
 
   const askClick = (ask: string): void => {

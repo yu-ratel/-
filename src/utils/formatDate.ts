@@ -1,4 +1,8 @@
-const FormatToday = () => {
+export const formatStrDate = (dateStr: string, length: number = 10) => {
+  return dateStr.slice(0, length);
+};
+
+export const formatToday = () => {
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -6,5 +10,3 @@ const FormatToday = () => {
 
   return `${year}-${month}-${day}`;
 };
-
-export default FormatToday;

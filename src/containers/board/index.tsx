@@ -1,6 +1,6 @@
 import Pagination from '@/components/Pagination';
 import { Database } from '@/types/supabase';
-import { formatStrDate } from '@/utils/formatStrDate';
+import { formatStrDate } from '@/utils/formatDate';
 
 type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
 
