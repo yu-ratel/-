@@ -1,5 +1,5 @@
 import { headers } from 'next/headers';
-import LinkButton from './LinkButton';
+import Link from 'next/link';
 
 const Nav = () => {
   const isUser = headers().get('isUser') === 'true' ? true : false;
@@ -7,16 +7,16 @@ const Nav = () => {
 
   return (
     <nav className="flex h-[10%] justify-between">
-      <LinkButton href="/" className="m-6">
+      <Link href="/" className="m-6">
         아름다움
-      </LinkButton>
+      </Link>
       <div className="m-6">
-        <LinkButton href="/board/1" className="m-6">
+        <Link href="/board/1" className="m-6">
           게시판
-        </LinkButton>
-        <LinkButton href={`/auth?${isUser}`} className="m-6">
+        </Link>
+        <Link href={`/auth?${isUser}`} className="m-6">
           {loginText}
-        </LinkButton>
+        </Link>
       </div>
     </nav>
   );

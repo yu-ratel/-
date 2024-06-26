@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import LinkButton from '@/components/LinkButton';
+import Link from 'next/link';
 
 const Home = () => {
   return (
@@ -12,12 +12,12 @@ const Home = () => {
         <figure className="relative h-96 w-96 justify-self-center">
           <Image src="/images/postCard.png" alt="postCard" layout="fill" objectFit="cover"></Image>
         </figure>
-        <LinkButton
+        <Link
           className="relative bottom-36 h-16  w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl"
           href="/for-me"
         >
           for me
-        </LinkButton>
+        </Link>
       </section>
     </main>
   );
