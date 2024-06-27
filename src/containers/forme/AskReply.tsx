@@ -1,33 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 import AskList from './AskList';
 import { formatToday } from '@/utils/formatDate';
 
-const AskReply = () => {
+const AskReply = forwardRef((_, ref) => {
   const today = formatToday();
-  const [text, setText] = useState('질문을 선택해주세요!');
+  const [title, setTitle] = useState('질문을 선택해주세요!');
+  const [text, setText] = useState('');
 
   const askClick = (ask: string): void => {
-    setText(ask);
+    setTitle(ask);
   };
+
+  useImperativeHandle(ref, () => ({
+    getText: () => [title, text],
+  }));
 
   return (
     <>
       <section className=" m-10 h-[28rem] w-[55rem] bg-white">
         <header className="h-1/5 bg-deepBraun">
           <div className="flex h-full items-center justify-evenly">
-            <h3>{text}</h3>
+            <h3>{title}</h3>
             <div className=" text-gray">{today}</div>
           </div>
         </header>
         <form className="h-4/5">
-          <textarea className="h-full w-full " placeholder="Some text" />
+          <textarea
+            className="h-full w-full "
+            placeholder="Some text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
         </form>
       </section>
       <AskList onClick={askClick} />
     </>
   );
-};
+});
 
 export default AskReply;

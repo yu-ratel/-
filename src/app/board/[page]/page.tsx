@@ -3,7 +3,9 @@ import Board from '@/containers/board';
 const fetchData = async (page: number) => {
   const curPage = Number(page);
   //cache: 'no-store',
-  const response = await fetch(`http://localhost:3000/api/boardPost?page=${curPage}`);
+  const response = await fetch(`http://localhost:3000/api/boardPost?page=${curPage}`, {
+    cache: 'no-store',
+  });
 
   return response.json();
 };
