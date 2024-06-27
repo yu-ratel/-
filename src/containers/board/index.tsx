@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Pagination from '@/components/Pagination';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
@@ -18,18 +19,20 @@ const Board = ({ data, totalCount, limit }: Props) => {
       <h1 className="text-center text-4xl text-white">우리들의 이야기</h1>
       <section className="m-10 h-4/5 bg-white">
         <div className="flex h-[10%] border-b-[1px] text-center *:mt-3 *:w-[25%]">
-          {titles.map((title, idx) => {
-            return <div key={idx}>{title}</div>;
+          {titles.map((title) => {
+            return <div key={title}>{title}</div>;
           })}
         </div>
-        {data.map((item, idx) => {
+        {data.map((item) => {
           return (
-            <div key={idx} className="flex text-center *:my-1.5 *:w-[25%]">
-              <div>{item.id}</div>
-              <div>{item.question}</div>
-              <div>{item.nickname}</div>
-              <div>{formatStrDate(item.updated_at)}</div>
-            </div>
+            <Link href={`/post/${item.id}`}>
+              <div key={item.id} className="flex text-center *:my-1.5 *:w-[25%]">
+                <div>{item.id}</div>
+                <div>{item.question}</div>
+                <div>{item.nickname}</div>
+                <div>{formatStrDate(item.updated_at)}</div>
+              </div>
+            </Link>
           );
         })}
       </section>

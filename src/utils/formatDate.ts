@@ -1,5 +1,5 @@
-export const formatStrDate = (dateStr: string, length: number = 10) => {
-  return dateStr.slice(0, length);
+export const formatStrDate = (dateStr: string, start: number = 0, end: number = 10) => {
+  return dateStr.slice(start, end);
 };
 
 export const formatToday = () => {
