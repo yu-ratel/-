@@ -5,11 +5,11 @@ import { formatStrDate } from '@/utils/formatDate';
 
 type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
 
-type Props = {
+interface Props {
   data: BoardDto[];
   totalCount: number;
   limit: number;
-};
+}
 
 const Board = ({ data, totalCount, limit }: Props) => {
   const titles = ['번호', '제목', '글쓴이', '작성일'];

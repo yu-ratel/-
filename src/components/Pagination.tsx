@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-type Props = {
+interface Props {
   totalCount: number;
   limit: number;
-};
+}
 
 const Pagination = ({ totalCount, limit }: Props) => {
   const { page } = useParams();
