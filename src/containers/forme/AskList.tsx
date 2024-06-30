@@ -6,7 +6,7 @@ import { Database } from '@/types/supabase';
 type AskDto = Database['public']['Tables']['questionnaires']['Row'];
 
 const AskList = ({ onClick }: { onClick: (ask: string) => void }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<AskDto[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,11 +17,12 @@ const AskList = ({ onClick }: { onClick: (ask: string) => void }) => {
 
     fetchData();
   }, []);
+
   return (
     <section className="m-10 grid h-[28rem] w-[30rem] overflow-auto bg-white">
       <h1 className="h-[5.5rem] content-center bg-deepBraun text-center">나를 알아가보세요.</h1>
       <div className="overflow-auto p-2">
-        {data.map((item: AskDto) => {
+        {data.map((item) => {
           return (
             <button
               className="mb-5 w-full p-5 shadow-md"

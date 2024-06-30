@@ -9,7 +9,7 @@ const AskReply = forwardRef((_, ref) => {
   const [title, setTitle] = useState('질문을 선택해주세요!');
   const [text, setText] = useState('');
 
-  const askClick = (ask: string): void => {
+  const askClick = (ask: string) => {
     setTitle(ask);
   };
 
@@ -28,7 +28,7 @@ const AskReply = forwardRef((_, ref) => {
         </header>
         <form className="h-4/5">
           <textarea
-            className="h-full w-full "
+            className="h-full w-full resize-none"
             placeholder="Some text"
             value={text}
             onChange={(e) => setText(e.target.value)}
