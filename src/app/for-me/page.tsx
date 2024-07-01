@@ -1,5 +1,7 @@
 import ForMe from '@/containers/forme';
 
-export default function ForMePage() {
+function ForMePage() {
   return <ForMe />;
 }
+
+export default ForMePage;

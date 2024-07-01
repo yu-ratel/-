@@ -5,7 +5,7 @@ import { Database } from '@/types/supabase';
 
 type AskDto = Database['public']['Tables']['questionnaires']['Row'];
 
-const AskList = ({ onClick }: { onClick: (ask: string) => void }) => {
+function AskList({ onClick }: { onClick: (ask: string) => void }) {
   const [data, setData] = useState<AskDto[]>([]);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AskList = ({ onClick }: { onClick: (ask: string) => void }) => {
       </div>
     </section>
   );
-};
+}
 
 export default AskList;
 

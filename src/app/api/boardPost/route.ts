@@ -1,7 +1,7 @@
-import { creatServer } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
+import creatServer from '@/lib/supabase/server';
 
-export const GET = async (request: Request) => {
+const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   // 쿼리스트링(기본값 1) 받아오면서 -1 (0부터 인덱스 시작)
   const page = parseInt(searchParams.get('page') || '1', 10) - 1;
@@ -21,3 +21,5 @@ export const GET = async (request: Request) => {
 
   return NextResponse.json({ totalCount: totalCount.count, result, limit });
 };
+
+export default GET;

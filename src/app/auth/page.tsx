@@ -1,10 +1,10 @@
 'use client';
 
-import { createClient } from '@/lib/supabase/client';
 import { useEffect } from 'react';
+import createClient from '@/lib/supabase/client';
 
-const page = () => {
-  //추후 타 플랫폼 추가를 위해 일단은 kakao default
+function Page() {
+  // 추후 타 플랫폼 추가를 위해 일단은 kakao default
   const supabase = createClient();
 
   const kakaoLogin = async () => {
@@ -30,9 +30,9 @@ const page = () => {
 
   useEffect(() => {
     handler();
-  }, [supabase]);
+  }, []);
 
   return <div>기다려주세요~</div>;
-};
+}
 
-export default page;
+export default Page;

@@ -1,7 +1,7 @@
-import { creatServer } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
+import creatServer from '@/lib/supabase/server';
 
-export async function GET(request: Request) {
+const GET = async (request: Request) => {
   const supabase = await creatServer();
   const { searchParams, origin } = new URL(request.url);
 
@@ -16,4 +16,6 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.redirect(origin);
-}
+};
+
+export default GET;

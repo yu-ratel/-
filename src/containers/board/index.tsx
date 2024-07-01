@@ -11,7 +11,7 @@ interface Props {
   limit: number;
 }
 
-const Board = ({ data, totalCount, limit }: Props) => {
+function Board({ data, totalCount, limit }: Props) {
   const titles = ['번호', '제목', '글쓴이', '작성일'];
 
   return (
@@ -41,6 +41,6 @@ const Board = ({ data, totalCount, limit }: Props) => {
       </footer>
     </main>
   );
-};
+}
 
 export default Board;

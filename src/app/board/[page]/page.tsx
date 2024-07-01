@@ -1,6 +1,5 @@
-import { Database } from '@/types/supabase';
-
 import Board from '@/containers/board';
+import { Database } from '@/types/supabase';
 
 type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
 
@@ -20,8 +19,10 @@ const fetchData = async (page: number) => {
   return response.json();
 };
 
-export default async function BoardPage({ params }: { params: { page: number } }) {
+async function BoardPage({ params }: { params: { page: number } }) {
   const { data, totalCount, limit }: Props = await fetchData(params.page);
 
   return <Board data={data} totalCount={totalCount} limit={limit} />;
 }
+
+export default BoardPage;

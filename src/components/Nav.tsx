@@ -1,8 +1,8 @@
 import { headers } from 'next/headers';
 import Link from 'next/link';
 
-const Nav = () => {
-  const isUser = headers().get('isUser') === 'true' ? true : false;
+function Nav() {
+  const isUser = headers().get('isUser') === 'true';
   const loginText = isUser ? '로그아웃' : '로그인';
 
   return (
@@ -20,6 +20,6 @@ const Nav = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Nav;

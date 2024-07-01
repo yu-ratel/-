@@ -1,8 +1,8 @@
 'use client';
 
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import AskList from './AskList';
 import { formatToday } from '@/utils/formatDate';
+import AskList from './AskList';
 
 const AskReply = forwardRef((_, ref) => {
   const today = formatToday();
@@ -39,5 +39,7 @@ const AskReply = forwardRef((_, ref) => {
     </>
   );
 });
+
+AskReply.displayName = 'AskReply';
 
 export default AskReply;

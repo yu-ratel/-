@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest) {
+function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const loginCookie = request.cookies.get('sb-rovcvqfcrtakgsbepdzj-auth-token-code-verifier');
@@ -12,3 +12,5 @@ export function middleware(request: NextRequest) {
     },
   });
 }
+
+export default middleware;

@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Database } from '@/types/supabase';
 import { create, get } from '@/actions/replies';
+import { Database } from '@/types/supabase';
 
 type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
 

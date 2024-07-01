@@ -1,14 +1,14 @@
 'use client';
 
-import useRepliesController from '@/hooks/useRepliesController';
 import { useRef } from 'react';
+import useRepliesController from '@/hooks/useRepliesController';
 import AskReply from './AskReply';
 
 type AskReplyHandle = {
   getText: () => string[];
 };
 
-const ForMe = () => {
+function ForMe() {
   const askReplyRef = useRef<AskReplyHandle>();
   const { createReplies } = useRepliesController();
 
@@ -41,6 +41,6 @@ const ForMe = () => {
       </section>
     </>
   );
-};
+}
 
 export default ForMe;
