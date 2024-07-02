@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import creatServer from '@/lib/supabase/server';
 
 const GET = async (request: Request) => {

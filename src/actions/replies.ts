@@ -1,6 +1,6 @@
 'use server';
 
-import { creatServer } from '@/lib/supabase/server';
+import creatServer from '@/lib/supabase/server';
 
 export const get = async () => {
   const supabase = await creatServer();

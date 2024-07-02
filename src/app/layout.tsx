@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav';
+
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 

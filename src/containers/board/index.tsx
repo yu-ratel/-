@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import Pagination from '@/components/Pagination';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
@@ -25,8 +26,8 @@ function Board({ data, totalCount, limit }: Props) {
         </div>
         {data.map((item) => {
           return (
-            <Link href={`/post/${item.id}`}>
-              <div key={item.id} className="flex text-center *:my-1.5 *:w-[25%]">
+            <Link href={`/post/${item.id}`} key={item.id}>
+              <div className="flex text-center *:my-1.5 *:w-[25%]">
                 <div>{item.id}</div>
                 <div>{item.question}</div>
                 <div>{item.nickname}</div>

@@ -1,5 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+
 import { Database } from '@/types/supabase';
 
 // RouteHandler, ServerAction 기본설정 rsc 있을 시 쿠키제어 x

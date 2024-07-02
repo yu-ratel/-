@@ -37,7 +37,7 @@
           "object",
           "type"
         ],
-        "newlines-between": "never",
+        "newlines-between": "always",
         "alphabetize": {
           "order": "asc"
         }
