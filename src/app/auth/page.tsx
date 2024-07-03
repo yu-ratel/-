@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import createClient from '@/lib/supabase/client';
 
 function Page() {
@@ -29,9 +27,7 @@ function Page() {
     else kakaoLogin();
   };
 
-  useEffect(() => {
-    handler();
-  }, []);
+  handler();
 
   return <div>기다려주세요~</div>;
 }
