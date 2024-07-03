@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import creatServer from '@/lib/supabase/server';
 
-const GET = async (request: Request) => {
+export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   // 쿼리스트링(기본값 1) 받아오면서 -1 (0부터 인덱스 시작)
   const page = parseInt(searchParams.get('page') || '1', 10) - 1;
@@ -14,13 +14,11 @@ const GET = async (request: Request) => {
   const totalCount = await supabase
     .from('user_replies_ris')
     .select('*', { count: 'exact', head: true });
-  const result = await supabase
+  const data = await supabase
     .from('user_replies_ris')
     .select('*')
     .order('id', { ascending: true })
     .range(startNum, endNum);
 
-  return NextResponse.json({ totalCount: totalCount.count, result, limit });
+  return NextResponse.json({ totalCount: totalCount.count, ...data, limit });
 };
-
-export default GET;
