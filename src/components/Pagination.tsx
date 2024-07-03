@@ -14,16 +14,16 @@ function Pagination({ totalCount, limit }: Props) {
   const pageNumbers = Array.from({ length: totalPage }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-center">
+    <ol className="flex justify-center">
       {pageNumbers.map((number) => (
-        <div
+        <li
           className={`w-10 rounded-lg text-center ${Number(page) === number ? ' bg-white' : ''}`}
           key={number}
         >
           <Link href={`/board/${number}`}>{number}</Link>
-        </div>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
 

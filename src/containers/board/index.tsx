@@ -19,27 +19,27 @@ function Board({ data, totalCount, limit }: Props) {
     <main className="h-[80%]">
       <h1 className="text-center text-4xl text-white">우리들의 이야기</h1>
       <section className="m-10 h-4/5 bg-white">
-        <div className="flex h-[10%] border-b-[1px] text-center *:mt-3 *:w-[25%]">
+        <ol className="flex h-[10%] border-b-[1px] text-center *:mt-3 *:w-[25%]">
           {titles.map((title) => {
-            return <div key={title}>{title}</div>;
+            return <li key={title}>{title}</li>;
           })}
-        </div>
+        </ol>
         {data.map((item) => {
           return (
             <Link href={`/post/${item.id}`} key={item.id}>
-              <div className="flex text-center *:my-1.5 *:w-[25%]">
-                <div>{item.id}</div>
-                <div>{item.question}</div>
-                <div>{item.nickname}</div>
-                <div>{formatStrDate(item.updated_at)}</div>
-              </div>
+              <ol className="flex text-center *:my-1.5 *:w-[25%]">
+                <li>{item.id}</li>
+                <li>{item.question}</li>
+                <li>{item.nickname}</li>
+                <li>{formatStrDate(item.updated_at)}</li>
+              </ol>
             </Link>
           );
         })}
       </section>
-      <footer>
+      <section>
         <Pagination totalCount={totalCount} limit={limit} />
-      </footer>
+      </section>
     </main>
   );
 }
