@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 
 import useRepliesController from '@/hooks/useRepliesController';
+import useToast from '@/hooks/useToast';
 
 import AskReply from './AskReply';
 
@@ -13,6 +14,7 @@ type AskReplyHandle = {
 function ForMe() {
   const askReplyRef = useRef<AskReplyHandle>();
   const { createReplies } = useRepliesController();
+  const { isToast, message, openToast } = useToast();
 
   const handleSubmit = () => {
     if (askReplyRef.current) {
@@ -21,27 +23,37 @@ function ForMe() {
     }
   };
 
+  const handleSave = () => {
+    openToast('저장이 완료 되었습니다.');
+  };
+
   return (
-    <>
-      <main className="flex">
+    <main>
+      <section>
         <AskReply ref={askReplyRef} />
-      </main>
-      <section className="m-10 text-center">
-        <button
-          className=" bottom-36 mx-20 h-16  w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl"
-          type="button"
-          onClick={handleSubmit}
-        >
-          작성하기
-        </button>
-        <button
-          className=" bottom-36 mx-20 h-16  w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl"
-          type="button"
-        >
-          공유하기
-        </button>
+        <section className="m-10 text-center">
+          <button
+            className=" bottom-36 mx-20 h-16  w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl"
+            type="button"
+            onClick={handleSubmit}
+          >
+            작성하기
+          </button>
+          <button
+            className=" bottom-36 mx-20 h-16  w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl"
+            type="button"
+            onClick={handleSave}
+          >
+            공유하기
+            {isToast && (
+              <div className="absolute bottom-24 w-44 rounded-md border border-solid p-1.5 text-xs">
+                {message}
+              </div>
+            )}
+          </button>
+        </section>
       </section>
-    </>
+    </main>
   );
 }
 
