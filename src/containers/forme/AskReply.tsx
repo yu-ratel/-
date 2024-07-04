@@ -20,7 +20,7 @@ const AskReply = forwardRef((_, ref) => {
   }));
 
   return (
-    <>
+    <section className="flex">
       <section className=" m-10 h-[28rem] w-[55rem] bg-white">
         <header className="h-1/5 bg-deepBraun">
           <div className="flex h-full items-center justify-evenly">
@@ -38,7 +38,7 @@ const AskReply = forwardRef((_, ref) => {
         </form>
       </section>
       <AskList onClick={askClick} />
-    </>
+    </section>
   );
 });
 

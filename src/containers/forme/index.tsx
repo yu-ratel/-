@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import { IoAlertCircleOutline as AlertIcon } from 'react-icons/io5';
 
 import useRepliesController from '@/hooks/useRepliesController';
 import useToast from '@/hooks/useToast';
@@ -19,7 +20,10 @@ function ForMe() {
   const handleSubmit = () => {
     if (askReplyRef.current) {
       const [title, reply] = askReplyRef.current.getText();
-      createReplies(title, reply);
+
+      if (reply === '') openToast('글을 작성해주세요.');
+      if (title === '질문을 선택해주세요!') openToast('질문을 선택해주세요.');
+      if (title && reply) createReplies(title, reply);
     }
   };
 
@@ -46,7 +50,8 @@ function ForMe() {
           >
             공유하기
             {isToast && (
-              <div className="absolute bottom-24 w-44 rounded-md border border-solid p-1.5 text-xs">
+              <div className="absolute bottom-24 flex w-44 items-center justify-evenly rounded-md  border border-solid p-1.5 text-xs">
+                <AlertIcon className="text-2xl" />
                 {message}
               </div>
             )}
