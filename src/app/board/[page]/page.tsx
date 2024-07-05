@@ -22,7 +22,7 @@ const fetchData = async (page: number) => {
 async function BoardPage({ params }: { params: { page: number } }) {
   const { data, totalCount, limit }: Props = await fetchData(params.page);
 
-  return <Board data={data} totalCount={totalCount} limit={limit} />;
+  return <Board data={data} totalCount={totalCount} limit={limit} page={params.page} />;
 }
 
 export default BoardPage;

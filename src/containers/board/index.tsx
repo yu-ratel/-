@@ -10,10 +10,12 @@ interface Props {
   data: BoardDto[];
   totalCount: number;
   limit: number;
+  page: number;
 }
 
-function Board({ data, totalCount, limit }: Props) {
+function Board({ data, totalCount, limit, page }: Props) {
   const titles = ['번호', '제목', '글쓴이', '작성일'];
+  const startPostNumber = (page - 1) * limit + 1;
 
   return (
     <main className="h-[80%]">
@@ -24,11 +26,11 @@ function Board({ data, totalCount, limit }: Props) {
             return <li key={title}>{title}</li>;
           })}
         </ol>
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
             <Link href={`/post/${item.id}`} key={item.id}>
               <ol className="flex text-center *:my-1.5 *:w-[25%]">
-                <li>{item.id}</li>
+                <li>{startPostNumber + index}</li>
                 <li>{item.question}</li>
                 <li>{item.nickname}</li>
                 <li>{formatStrDate(item.updated_at)}</li>
