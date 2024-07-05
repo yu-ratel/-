@@ -11,6 +11,7 @@ import ToastPopUp from './ToastPopUp';
 
 type AskReplyHandle = {
   getText: () => string[];
+  clearText: () => void;
 };
 
 function ForMe() {
@@ -28,6 +29,7 @@ function ForMe() {
       if (title && reply) {
         openToastSubmit('작성 되었습니다.');
         createReplies(title, reply);
+        askReplyRef.current.clearText();
       }
     }
   };

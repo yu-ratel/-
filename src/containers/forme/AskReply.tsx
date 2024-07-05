@@ -17,6 +17,7 @@ const AskReply = forwardRef((_, ref) => {
 
   useImperativeHandle(ref, () => ({
     getText: () => [title, text],
+    clearText: () => setText(''),
   }));
 
   return (
