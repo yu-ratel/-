@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  // eslint-disable-next-line react/require-default-props
   variant?: 'primary' | 'update';
 }
 
@@ -17,9 +18,5 @@ function Button({ variant = 'primary', children, ...props }: Props) {
     </button>
   );
 }
-
-Button.defaultProps = {
-  variant: 'primary',
-};
 
 export default Button;
