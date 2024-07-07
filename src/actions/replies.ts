@@ -2,14 +2,6 @@
 
 import creatServer from '@/lib/supabase/server';
 
-export const get = async () => {
-  const supabase = await creatServer();
-
-  const result = await supabase.from('user_replies_ris').select('*').is('deleted_at', null);
-
-  return result.data;
-};
-
 export const create = async (question: string, replie: string) => {
   const supabase = await creatServer();
   const {
