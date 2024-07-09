@@ -3,7 +3,7 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
-      questionnaires: {
+      question: {
         Row: {
           id: number;
           question: string;
@@ -18,7 +18,7 @@ export type Database = {
         };
         Relationships: [];
       };
-      user_replies_ris: {
+      user_post_rls: {
         Row: {
           created_at: string;
           deleted_at: string | null;

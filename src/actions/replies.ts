@@ -9,7 +9,7 @@ export const create = async (question: string, replie: string) => {
   } = await supabase.auth.getUser();
 
   const result = await supabase
-    .from('user_replies_ris')
+    .from('user_post_rls')
     .insert({
       question,
       replie,
@@ -23,7 +23,7 @@ export const update = async (id: string, replie: string) => {
   const supabase = await creatServer();
 
   const result = await supabase
-    .from('user_replies_ris')
+    .from('user_post_rls')
     .update({
       replie,
       updated_at: new Date().toISOString(),
@@ -38,7 +38,7 @@ export const deleted = async (id: string) => {
   const supabase = await creatServer();
 
   const result = await supabase
-    .from('user_replies_ris')
+    .from('user_post_rls')
     .update({
       deleted_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),

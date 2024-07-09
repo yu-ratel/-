@@ -12,10 +12,10 @@ export const GET = async (request: Request) => {
   const [startNum, endNum] = [page * limit, (page + 1) * limit - 1];
 
   const totalCount = await supabase
-    .from('user_replies_ris')
+    .from('user_post_rls')
     .select('*', { count: 'exact', head: true });
   const data = await supabase
-    .from('user_replies_ris')
+    .from('user_post_rls')
     .select('*')
     .order('id', { ascending: true })
     .range(startNum, endNum);

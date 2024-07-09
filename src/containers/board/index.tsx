@@ -4,7 +4,7 @@ import Pagination from '@/components/Pagination';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
-type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
+type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 
 interface Props {
   data: BoardDto[];

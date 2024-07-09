@@ -2,7 +2,7 @@ import { Database } from '@/types/supabase';
 
 import Comment from './Comment';
 
-type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
+type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 
 function Post({ data }: { data: BoardDto }) {
   return (

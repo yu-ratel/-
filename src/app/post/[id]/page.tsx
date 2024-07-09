@@ -1,7 +1,7 @@
 import Post from '@/containers/post';
 import { Database } from '@/types/supabase';
 
-type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
+type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 
 const fetchData = async (id: number) => {
   const curId = Number(id);

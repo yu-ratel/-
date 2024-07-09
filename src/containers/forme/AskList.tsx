@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { Database } from '@/types/supabase';
 
-type AskDto = Database['public']['Tables']['questionnaires']['Row'];
+type AskDto = Database['public']['Tables']['question']['Row'];
 
 function AskList({ onClick }: { onClick: (ask: string) => void }) {
   const [data, setData] = useState<AskDto[]>([]);

@@ -1,7 +1,7 @@
 import Board from '@/containers/board';
 import { Database } from '@/types/supabase';
 
-type BoardDto = Database['public']['Tables']['user_replies_ris']['Row'];
+type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 
 interface Props {
   data: BoardDto[];
