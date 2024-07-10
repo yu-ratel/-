@@ -3,8 +3,14 @@ import { Database } from '@/types/supabase';
 import Comment from './Comment';
 
 type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
+type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
 
-function Post({ data }: { data: BoardDto }) {
+interface Props extends BoardDto {
+  user_comment_rls: CommentDto[];
+}
+
+function Post({ data }: { data: Props }) {
+  console.log(data.user_comment_rls);
   return (
     <main className="h-[80%]">
       <h1 className="text-center text-4xl text-white">우리들의 이야기</h1>
@@ -16,7 +22,7 @@ function Post({ data }: { data: BoardDto }) {
           </div>
           <div>{data.replie}</div>
         </section>
-        <Comment />
+        <Comment data={data.user_comment_rls} />
       </section>
     </main>
   );

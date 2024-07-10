@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { FaRegPenToSquare as Pen } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
+import { Database } from '@/types/supabase';
 
-function Comment() {
+type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
+
+function Comment({ data }: { data: CommentDto[] }) {
   const [isCommentWindow, SetCommentWindow] = useState(false);
 
   const onCommentWindow = () => {
@@ -19,9 +22,14 @@ function Comment() {
   return (
     <section className="ml-2 mr-10 mt-10 h-4/5 w-2/5 bg-white">
       <div className="h-4/5 *:h-16">
-        <div>댓글1</div>
-        <div>댓글2</div>
-        <div>댓글3</div>
+        {data.length &&
+          data.map((comment) => (
+            <div key={comment.id}>
+              <div>{comment.nickname}</div>
+              <div>{comment.comment}</div>
+              <div>{comment.updated_at}</div>
+            </div>
+          ))}
       </div>
       <div className="flex justify-center">
         <div className="flex w-4/5 items-center rounded-md  border border-solid p-1.5">
