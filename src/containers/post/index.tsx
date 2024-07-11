@@ -1,4 +1,5 @@
 import { Database } from '@/types/supabase';
+import { formatStrDate } from '@/utils/formatDate';
 
 import Comment from './Comment';
 
@@ -10,17 +11,16 @@ interface Props extends BoardDto {
 }
 
 function Post({ data }: { data: Props }) {
-  console.log(data.user_comment_rls);
   return (
     <main className="h-[80%]">
       <h1 className="text-center text-4xl text-white">우리들의 이야기</h1>
       <section className="flex h-full">
         <section className="ml-10 mt-10 h-4/5 w-3/5 bg-white *:m-5">
-          <div>{data.question}</div>
-          <div>
-            {data.nickname} {data.updated_at}
+          <h2 className="text-2xl">{data.question}</h2>
+          <p className="h-[70%]">{data.replie}</p>
+          <div className="text-center text-[gray]">
+            {data.nickname}님의 이야기 {formatStrDate(data.updated_at)}
           </div>
-          <div>{data.replie}</div>
         </section>
         <Comment data={data.user_comment_rls} />
       </section>
