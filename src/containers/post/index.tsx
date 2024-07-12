@@ -22,7 +22,7 @@ function Post({ data }: { data: Props }) {
             {data.nickname}님의 이야기 {formatStrDate(data.updated_at)}
           </div>
         </section>
-        <Comment data={data.user_comment_rls} />
+        <Comment data={data.user_comment_rls} postId={data.id} />
       </section>
     </main>
   );

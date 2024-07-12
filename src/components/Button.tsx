@@ -9,7 +9,7 @@ function Button({ variant = 'primary', children, ...props }: Props) {
   const STYLE = {
     primary:
       'bottom-36 mx-20 h-16 rounded-xl w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl',
-    update: '',
+    update: 'm-2 text-sm',
   };
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
