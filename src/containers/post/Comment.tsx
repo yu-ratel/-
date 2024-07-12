@@ -10,12 +10,13 @@ import useCommentController from '@/hooks/useCommentController';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
+import CommentBox from './CommentBox';
+
 type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
 
 function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
   const [isCommentWindow, SetCommentWindow] = useState(false);
-  const [text, setText] = useState('');
-  const { createComment, deletedComment } = useCommentController();
+  const { deletedComment } = useCommentController();
 
   const onCommentWindow = () => {
     SetCommentWindow(true);
@@ -23,12 +24,6 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
 
   const closeCommentWindow = () => {
     SetCommentWindow(false);
-  };
-
-  const onSubmit = () => {
-    createComment(postId, text);
-    setText('');
-    closeCommentWindow();
   };
 
   const onClear = (id: number) => {
@@ -70,17 +65,7 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
             onClick={onCommentWindow}
           />
           {isCommentWindow && (
-            <div className="border-gray-300 absolute right-[30px] z-[5] h-[200px] w-[40%] overflow-hidden rounded border bg-braun p-2.5">
-              <textarea
-                className=" mt-3 h-20 w-full resize-none rounded-xl"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-              <div className="flex justify-center bg-braun *:m-5">
-                <Button onClick={onSubmit}>작성</Button>
-                <Button onClick={closeCommentWindow}>닫기</Button>
-              </div>
-            </div>
+            <CommentBox postId={postId} closeCommentWindow={closeCommentWindow} />
           )}
         </div>
       </div>
