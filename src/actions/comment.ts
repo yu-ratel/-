@@ -2,7 +2,7 @@
 
 import creatServer from '@/lib/supabase/server';
 
-export const create = async (id: number, comment: string) => {
+export const create = async (postId: number, comment: string) => {
   const supabase = await creatServer();
   const {
     data: { user },
@@ -11,7 +11,7 @@ export const create = async (id: number, comment: string) => {
   const result = await supabase
     .from('user_comment_rls')
     .insert({
-      post_id: id,
+      post_id: postId,
       comment,
       nickname: user?.user_metadata.name,
     })
@@ -19,7 +19,7 @@ export const create = async (id: number, comment: string) => {
   return result.data;
 };
 
-export const update = async (id: string, comment: string) => {
+export const update = async (id: number, comment: string) => {
   const supabase = await creatServer();
 
   const result = await supabase
@@ -34,17 +34,10 @@ export const update = async (id: string, comment: string) => {
   return result.data;
 };
 
-export const deleted = async (id: string) => {
+export const deleted = async (id: number) => {
   const supabase = await creatServer();
 
-  const result = await supabase
-    .from('user_comment_rls')
-    .update({
-      deleted_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    })
-    .eq('id', id)
-    .select();
+  const result = await supabase.from('user_comment_rls').delete().eq('id', id);
 
   return result.data;
 };

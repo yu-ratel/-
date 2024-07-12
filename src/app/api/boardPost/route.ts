@@ -13,10 +13,12 @@ export const GET = async (request: Request) => {
 
   const totalCount = await supabase
     .from('user_post_rls')
-    .select('*', { count: 'exact', head: true });
+    .select('*', { count: 'exact', head: true })
+    .is('deleted_at', null);
   const data = await supabase
     .from('user_post_rls')
     .select('*')
+    .is('deleted_at', null)
     .order('id', { ascending: true })
     .range(startNum, endNum);
 
