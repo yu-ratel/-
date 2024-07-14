@@ -1,8 +1,12 @@
-import { create, deleted } from '@/actions/comment';
+import { create, update, deleted } from '@/actions/comment';
 
 const useCommentController = () => {
   const createComment = async (id: number, comment: string) => {
     await create(id, comment);
+  };
+
+  const updateComment = async (id: number, comment: string) => {
+    await update(id, comment);
   };
 
   const deletedComment = async (id: number) => {
@@ -11,6 +15,7 @@ const useCommentController = () => {
 
   return {
     createComment,
+    updateComment,
     deletedComment,
   };
 };

@@ -15,15 +15,21 @@ import CommentBox from './CommentBox';
 type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
 
 function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
-  const [isCommentWindow, SetCommentWindow] = useState(false);
+  const [isCommentWindow, setCommentWindow] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const { deletedComment } = useCommentController();
 
   const onCommentWindow = () => {
-    SetCommentWindow(true);
+    setCommentWindow(true);
   };
 
-  const closeCommentWindow = () => {
-    SetCommentWindow(false);
+  const onClose = () => {
+    setCommentWindow(false);
+    setSelectedId(null);
+  };
+
+  const onUpdate = (id: number) => {
+    setSelectedId(id);
   };
 
   const onClear = (id: number) => {
@@ -42,12 +48,19 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
               </div>
               <div className="flex">
                 <div className="w-[90%]">{comment.comment}</div>
-                <Button variant="update">
+                <Button variant="update" onClick={() => onUpdate(comment.id)}>
                   <UpdatePen />
                 </Button>
                 <Button variant="update" onClick={() => onClear(comment.id)}>
                   <Clear />
                 </Button>
+                {selectedId === comment.id && (
+                  <CommentBox
+                    curId={comment.id}
+                    comment={comment.comment}
+                    closeCommentWindow={onClose}
+                  />
+                )}
               </div>
             </div>
           ))
@@ -55,7 +68,7 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
           <div className="m-10 text-center">소중한 댓글을 남겨주세요!</div>
         )}
       </div>
-      <div className="flex justify-center">
+      <div className="mt-6 flex justify-center">
         <div className="flex w-4/5 items-center rounded-md  border border-[gray] p-1.5">
           <Pen className="mr-3 text-3xl" />
           <input
@@ -64,9 +77,7 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
             placeholder="댓글을 작성해보세요."
             onClick={onCommentWindow}
           />
-          {isCommentWindow && (
-            <CommentBox postId={postId} closeCommentWindow={closeCommentWindow} />
-          )}
+          {isCommentWindow && <CommentBox postId={postId} closeCommentWindow={onClose} />}
         </div>
       </div>
     </section>
