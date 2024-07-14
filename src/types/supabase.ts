@@ -21,7 +21,6 @@ export type Database = {
       user_comment_rls: {
         Row: {
           comment: string;
-          created_at: string | null;
           id: number;
           nickname: string;
           post_id: number;
@@ -30,7 +29,6 @@ export type Database = {
         };
         Insert: {
           comment?: string;
-          created_at?: string | null;
           id?: number;
           nickname?: string;
           post_id: number;
@@ -39,7 +37,6 @@ export type Database = {
         };
         Update: {
           comment?: string;
-          created_at?: string | null;
           id?: number;
           nickname?: string;
           post_id?: number;
