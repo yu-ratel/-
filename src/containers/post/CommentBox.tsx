@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, ChangeEvent } from 'react';
 
 import Button from '@/components/Button';
 import useCommentController from '@/hooks/useCommentController';
@@ -25,6 +25,14 @@ function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
     }
   }, [comment]);
 
+  const handleComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const maxLength = 100;
+
+    if (event.target.value.length <= maxLength) {
+      setText(event.target.value);
+    }
+  };
+
   const onSubmit = () => {
     if (postId) {
       createComment(postId, text);
@@ -37,12 +45,12 @@ function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
   };
 
   return (
-    <div className="border-gray-300 absolute right-[30px] h-[200px] w-[40%] overflow-hidden rounded border bg-braun p-2.5">
+    <div className="border-gray-300 absolute bottom-3 right-[30px] h-[200px] w-[40%] overflow-hidden rounded border bg-braun p-2.5">
       <textarea
         ref={inputRef}
         className="mt-3 h-20 w-full resize-none rounded-xl p-2 focus:outline-none"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => handleComment(e)}
       />
       <div className="flex justify-center bg-braun *:m-5">
         {curId ? (

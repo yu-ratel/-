@@ -38,7 +38,7 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
 
   return (
     <section className="ml-2 mr-10 mt-10 h-4/5 w-2/5 bg-white">
-      <div className="h-4/5 overflow-auto *:h-20">
+      <div className="h-4/5 overflow-auto">
         {data.length ? (
           data.map((comment) => (
             <div key={comment.id} className="m-5 rounded-md shadow shadow-braun *:p-2">
