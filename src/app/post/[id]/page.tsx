@@ -10,7 +10,9 @@ interface Props extends BoardDto {
 
 const fetchData = async (id: number) => {
   const curId = Number(id);
-  const response = await fetch(`http://localhost:3000/api/post?id=${curId}`, { cache: 'no-store' });
+  const response = await fetch(`http://localhost:3000/api/post?id=${curId}`, {
+    next: { tags: ['post'] },
+  });
 
   return response.json();
 };

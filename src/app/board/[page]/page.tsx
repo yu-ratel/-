@@ -11,9 +11,8 @@ interface Props {
 
 const fetchData = async (page: number) => {
   const curPage = Number(page);
-  // cache: 'no-store',
   const response = await fetch(`http://localhost:3000/api/boardPost?page=${curPage}`, {
-    cache: 'no-store',
+    next: { tags: ['board'] },
   });
 
   return response.json();

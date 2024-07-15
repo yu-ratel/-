@@ -1,6 +1,9 @@
 'use server';
 
 import creatServer from '@/lib/supabase/server';
+import onRevalidate from '@/utils/revalidate';
+
+const revalidateTag = 'board';
 
 export const create = async (question: string, replie: string) => {
   const supabase = await creatServer();
@@ -16,6 +19,9 @@ export const create = async (question: string, replie: string) => {
       nickname: user?.user_metadata.name,
     })
     .select();
+
+  onRevalidate(revalidateTag);
+
   return result.data;
 };
 
@@ -31,6 +37,8 @@ export const update = async (id: string, replie: string) => {
     .eq('id', id)
     .select();
 
+  onRevalidate(revalidateTag);
+
   return result.data;
 };
 
@@ -45,6 +53,8 @@ export const deleted = async (id: string) => {
     })
     .eq('id', id)
     .select();
+
+  onRevalidate(revalidateTag);
 
   return result.data;
 };
