@@ -11,7 +11,6 @@ interface Props {
   comment?: string;
   closeCommentWindow: () => void;
 }
-
 function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
   const [text, setText] = useState('');
   const { updateComment, createComment } = useCommentController();

@@ -1,8 +1,9 @@
-import { headers } from 'next/headers';
 import Link from 'next/link';
 
+import loginState from '@/utils/loginState';
+
 function Nav() {
-  const isUser = headers().get('isUser') === 'true';
+  const isUser = loginState();
   const loginText = isUser ? '로그아웃' : '로그인';
 
   return (

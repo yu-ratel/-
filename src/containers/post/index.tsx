@@ -1,5 +1,6 @@
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
+import loginState from '@/utils/loginState';
 
 import Comment from './Comment';
 
@@ -22,7 +23,7 @@ function Post({ data }: { data: Props }) {
             {data.nickname}님의 이야기 {formatStrDate(data.updated_at)}
           </div>
         </section>
-        <Comment data={data.user_comment_rls} postId={data.id} />
+        <Comment data={data.user_comment_rls} postId={data.id} isLogin={loginState()} />
       </section>
     </main>
   );

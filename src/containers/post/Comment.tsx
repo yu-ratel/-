@@ -5,6 +5,7 @@ import { BsPencil as UpdatePen } from 'react-icons/bs';
 import { FaRegPenToSquare as Pen } from 'react-icons/fa6';
 import { MdOutlineClear as Clear } from 'react-icons/md';
 
+import AlertBox from '@/components/AlertBox';
 import Button from '@/components/Button';
 import useCommentController from '@/hooks/useCommentController';
 import { Database } from '@/types/supabase';
@@ -14,7 +15,13 @@ import CommentBox from './CommentBox';
 
 type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
 
-function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
+interface Props {
+  data: CommentDto[];
+  postId: number;
+  isLogin: boolean;
+}
+
+function Comment({ data, postId, isLogin }: Props) {
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { deletedComment } = useCommentController();
@@ -77,7 +84,10 @@ function Comment({ data, postId }: { data: CommentDto[]; postId: number }) {
             placeholder="댓글을 작성해보세요."
             onClick={onCommentWindow}
           />
-          {isCommentWindow && <CommentBox postId={postId} closeCommentWindow={onClose} />}
+          {isCommentWindow && isLogin && (
+            <CommentBox postId={postId} closeCommentWindow={onClose} />
+          )}
+          {isCommentWindow && !isLogin && <AlertBox onClose={onClose} />}
         </div>
       </div>
     </section>
