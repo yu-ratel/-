@@ -44,11 +44,11 @@ function ForMe() {
         <AskReply ref={askReplyRef} />
         <section className="m-10 text-center">
           <Button onClick={handleSubmit}>
-            작성하기
+            <div>작성하기</div>
             {isToastSubmit && <ToastPopUp message={messageSubmit} />}
           </Button>
           <Button onClick={handleSave}>
-            공유하기
+            <div>공유하기</div>
             {isToastSave && <ToastPopUp message={messageSave} />}
           </Button>
         </section>

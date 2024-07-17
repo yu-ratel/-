@@ -15,12 +15,12 @@ const useToast = () => {
       clearTimeout(toastTimer.current);
     }
 
-    const timer = setTimeout(() => {
-      setIsToast(false);
-      setMessage('');
-    }, 2000);
+    // const timer = setTimeout(() => {
+    //   setIsToast(false);
+    //   setMessage('');
+    // }, 2000);
 
-    toastTimer.current = timer;
+    // toastTimer.current = timer;
   };
 
   return { isToast, message, openToast };
