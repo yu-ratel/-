@@ -29,9 +29,9 @@ function Board({ data, totalCount, limit, page }: Props) {
         {data.map((item, index) => {
           return (
             <Link href={`/post/${item.id}`} key={item.id}>
-              <ol className="flex text-center *:my-1.5 *:w-[25%]">
+              <ol className="mb-5 flex h-10 text-center *:my-1.5 *:w-[25%]">
                 <li>{startPostNumber + index}</li>
-                <li>{item.question}</li>
+                <li className="truncate">{item.question}</li>
                 <li>{item.nickname}</li>
                 <li>{formatStrDate(item.updated_at)}</li>
               </ol>
