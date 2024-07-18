@@ -25,13 +25,13 @@ const AskReply = forwardRef((_, ref) => {
       <section className=" m-10 h-[28rem] w-[55rem] bg-white">
         <header className="h-1/5 bg-deepBraun">
           <div className="flex h-full items-center justify-evenly">
-            <h3>{title}</h3>
+            <h3 className="text-white">{title}</h3>
             <div className=" text-gray">{today}</div>
           </div>
         </header>
         <form className="h-4/5">
           <textarea
-            className="h-full w-full resize-none"
+            className="h-full w-full resize-none focus:outline-none"
             placeholder="Some text"
             value={text}
             onChange={(e) => setText(e.target.value)}

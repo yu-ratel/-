@@ -21,7 +21,7 @@ function Board({ data, totalCount, limit, page }: Props) {
     <main className="h-[80%]">
       <h1 className="text-center text-4xl text-white">우리들의 이야기</h1>
       <section className="m-10 h-4/5 bg-white">
-        <ol className="flex h-[10%] border-b-[1px] text-center *:mt-3 *:w-[25%]">
+        <ol className="flex h-[10%] border-b-[1px] bg-deepBraun text-center text-white *:mt-3 *:w-[25%]">
           {titles.map((title) => {
             return <li key={title}>{title}</li>;
           })}

@@ -80,7 +80,7 @@ function Comment({ data, postId, isLogin }: Props) {
           <Pen className="mr-3 text-3xl" />
           <input
             type="text"
-            className="w-full"
+            className="w-full focus:outline-none"
             placeholder="댓글을 작성해보세요."
             onClick={onCommentWindow}
           />
