@@ -11,7 +11,7 @@ function AskList({ onClick }: { onClick: (ask: string) => void }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3000/api/questionnaire');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/questionnaire`);
       const result = await response.json();
       setData(result.data);
     };
@@ -41,9 +41,3 @@ function AskList({ onClick }: { onClick: (ask: string) => void }) {
 }
 
 export default AskList;
-
-// 오늘 배운점
-// SSR에서 routeHandler를 사용할때는 데이터를 패칭해오는 과정이 필요하다.
-// serverAction이 굳이 필요한가? -> get안됌
-// 에러에 대한 로딩도 공부해야할듯
-// useClinet 로 설정했으니까 상호작용하는 onClick넣어도될듯

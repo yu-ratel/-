@@ -11,9 +11,12 @@ interface Props {
 
 const fetchData = async (page: number) => {
   const curPage = Number(page);
-  const response = await fetch(`http://localhost:3000/api/boardPost?page=${curPage}`, {
-    next: { tags: ['board'] },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/boardPost?page=${curPage}`,
+    {
+      next: { tags: ['board'] },
+    },
+  );
 
   return response.json();
 };
