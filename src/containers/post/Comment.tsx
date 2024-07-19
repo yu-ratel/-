@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPencil as UpdatePen } from 'react-icons/bs';
 import { FaRegPenToSquare as Pen } from 'react-icons/fa6';
 import { MdOutlineClear as Clear } from 'react-icons/md';
@@ -8,6 +8,7 @@ import { MdOutlineClear as Clear } from 'react-icons/md';
 import AlertBox from '@/components/AlertBox';
 import Button from '@/components/Button';
 import useCommentController from '@/hooks/useCommentController';
+import createClient from '@/lib/supabase/client';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
@@ -22,9 +23,24 @@ interface Props {
 }
 
 function Comment({ data, postId, isLogin }: Props) {
+  const [userId, setUserId] = useState<string | null>(null);
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { deletedComment } = useCommentController();
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const userInfo = async () => {
+      const result = await supabase.auth.getUser();
+
+      if (result.data.user) {
+        setUserId(result.data.user.id);
+      }
+    };
+
+    userInfo();
+  }, []);
 
   const onCommentWindow = () => {
     setCommentWindow(true);
@@ -55,12 +71,16 @@ function Comment({ data, postId, isLogin }: Props) {
               </div>
               <div className="flex">
                 <div className="w-[90%]">{comment.comment}</div>
-                <Button variant="update" onClick={() => onUpdate(comment.id)}>
-                  <UpdatePen />
-                </Button>
-                <Button variant="update" onClick={() => onClear(comment.id)}>
-                  <Clear />
-                </Button>
+                {userId === comment.user_id && (
+                  <>
+                    <Button variant="update" onClick={() => onUpdate(comment.id)}>
+                      <UpdatePen />
+                    </Button>
+                    <Button variant="update" onClick={() => onClear(comment.id)}>
+                      <Clear />
+                    </Button>
+                  </>
+                )}
                 {selectedId === comment.id && (
                   <CommentBox
                     curId={comment.id}
