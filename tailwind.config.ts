@@ -13,6 +13,7 @@ const config: Config = {
       white: '#FFFFFF',
       braun: '#c1b199',
       deepBraun: '#BFA989',
+      black: '#000000',
     },
   },
   plugins: [],
