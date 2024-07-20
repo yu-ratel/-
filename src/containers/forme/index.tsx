@@ -20,22 +20,31 @@ function ForMe() {
   const { isToast: isToastSubmit, message: messageSubmit, openToast: openToastSubmit } = useToast();
   const { isToast: isToastSave, message: messageSave, openToast: openToastSave } = useToast();
 
-  const handleSubmit = () => {
+  const handleSubmit = (title: string, reply: string) => {
+    openToastSubmit('작성 되었습니다.');
+    createReplies(title, reply);
+    askReplyRef.current!.clearText();
+  };
+
+  const handleSave = (title: string, reply: string) => {
+    openToastSave('저장이 완료 되었습니다.');
+  };
+
+  const handleForme = (variant: string, onClicked: (message: string) => void) => {
     if (askReplyRef.current) {
       const [title, reply] = askReplyRef.current.getText();
 
-      if (reply === '') openToastSubmit('글을 작성해주세요.');
-      if (title === '질문을 선택해주세요!') openToastSubmit('질문을 선택해주세요.');
-      if (title && reply) {
-        openToastSubmit('작성 되었습니다.');
-        createReplies(title, reply);
-        askReplyRef.current.clearText();
+      if (reply === '') onClicked('글을 작성해주세요.');
+      if (title === '질문을 선택해주세요!') onClicked('질문을 선택해주세요.');
+      if (title !== '질문을 선택해주세요!' && reply) {
+        if (variant === 'submit') {
+          handleSubmit(title, reply);
+        }
+        if (variant === 'save') {
+          handleSave(title, reply);
+        }
       }
     }
-  };
-
-  const handleSave = () => {
-    openToastSave('저장이 완료 되었습니다.');
   };
 
   return (
@@ -43,11 +52,11 @@ function ForMe() {
       <section>
         <AskReply ref={askReplyRef} />
         <section className="m-10 text-center">
-          <Button onClick={handleSubmit}>
+          <Button onClick={() => handleForme('submit', openToastSubmit)}>
             작성하기
             {isToastSubmit && <ToastPopUp message={messageSubmit} />}
           </Button>
-          <Button onClick={handleSave}>
+          <Button onClick={() => handleForme('save', openToastSave)}>
             공유하기
             {isToastSave && <ToastPopUp message={messageSave} />}
           </Button>
