@@ -65,10 +65,12 @@ function ForMe() {
             {isToastSubmit && <ToastPopUp message={messageSubmit} />}
           </Button>
           <Button onClick={() => handleForme('save', openToastSave)}>
-            공유하기
+            저장하기
             {isToastSave && <ToastPopUp message={messageSave} />}
           </Button>
-          {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}
+          {isSave && (
+            <SaveFile title={title} reply={reply} onClose={onClose} openToastSave={openToastSave} />
+          )}
         </section>
       </section>
     </main>
