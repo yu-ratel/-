@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: theme('colors.braun');
-  height: 100vh;
+@layer base {
+  body {
+    height: 100vh;
+    background-color: theme('colors.braun');
+  }
+}
+
+@layer utilities {
+  .note {
+    padding: 4px 16px;
+    background-image: linear-gradient(to bottom, transparent 35px, theme('colors.gray') 36px);
+    background-size: 100% 36px;
+    font-size: 14.5px;
+    line-height: 36px;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
 }

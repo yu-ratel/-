@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   // eslint-disable-next-line react/require-default-props
-  variant?: 'primary' | 'update';
+  variant?: 'primary' | 'update' | 'save';
 }
 
 function Button({ variant = 'primary', children, ...props }: Props) {
@@ -10,6 +10,7 @@ function Button({ variant = 'primary', children, ...props }: Props) {
     primary:
       'bottom-36 mx-20 h-16 rounded-xl w-44 content-center justify-self-center bg-deepBraun text-center text-white shadow-xl',
     update: 'm-2 text-sm',
+    save: 'text-sm mb-4 w-[30%]',
   };
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
