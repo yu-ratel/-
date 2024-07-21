@@ -23,6 +23,10 @@ function ForMe() {
   const { isToast: isToastSubmit, message: messageSubmit, openToast: openToastSubmit } = useToast();
   const { isToast: isToastSave, message: messageSave, openToast: openToastSave } = useToast();
 
+  const onClose = () => {
+    setSave(false);
+  };
+
   const handleSubmit = () => {
     openToastSubmit('작성 되었습니다.');
     createReplies(title, reply);
@@ -30,8 +34,7 @@ function ForMe() {
   };
 
   const handleSave = () => {
-    setSave(true);
-    openToastSave('저장이 완료 되었습니다.');
+    return isSave ? openToastSave('저장이 완료 되었습니다.') : setSave(true);
   };
 
   const handleForme = (variant: string, onClicked: (message: string) => void) => {
@@ -39,9 +42,9 @@ function ForMe() {
       const [curTitle, curReply] = askReplyRef.current.getText();
       setPost([curTitle, curReply]);
 
-      if (reply === '') onClicked('글을 작성해주세요.');
-      if (title === '질문을 선택해주세요!') onClicked('질문을 선택해주세요.');
-      if (title !== '질문을 선택해주세요!' && reply) {
+      if (curReply === '') onClicked('글을 작성해주세요.');
+      if (curTitle === '질문을 선택해주세요!') onClicked('질문을 선택해주세요.');
+      if (curTitle !== '질문을 선택해주세요!' && curReply) {
         if (variant === 'submit') {
           handleSubmit();
         }
@@ -63,9 +66,9 @@ function ForMe() {
           </Button>
           <Button onClick={() => handleForme('save', openToastSave)}>
             공유하기
-            {isSave && <SaveFile title={title} reply={reply} />}
             {isToastSave && <ToastPopUp message={messageSave} />}
           </Button>
+          {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}
         </section>
       </section>
     </main>
