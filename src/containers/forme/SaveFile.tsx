@@ -28,8 +28,7 @@ function SaveFile({ title, reply, onClose, openToastSave }: Props) {
           link.click();
           openToastSave('저장 되었습니다!');
         })
-        .catch((e) => {
-          onClose();
+        .catch(() => {
           openToastSave('다시 시도해주세요.');
         })
         .finally(() => {

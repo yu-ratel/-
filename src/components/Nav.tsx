@@ -15,6 +15,11 @@ function Nav() {
         <Link href="/board/1" className="m-6">
           게시판
         </Link>
+        {isUser && (
+          <Link href="/my_info" className="m-6">
+            마이페이지
+          </Link>
+        )}
         <Link href={`/auth?${isUser}`} className="m-6">
           {loginText}
         </Link>
