@@ -16,7 +16,7 @@ function Nav() {
           게시판
         </Link>
         {isUser && (
-          <Link href="/my_info" className="m-6">
+          <Link href="/mypage/my-info" className="m-6">
             마이페이지
           </Link>
         )}
