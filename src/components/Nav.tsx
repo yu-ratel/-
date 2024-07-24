@@ -1,28 +1,18 @@
-import Link from 'next/link';
-
 import loginState from '@/utils/loginState';
+
+import ActiveLink from './ActiveLink';
 
 function Nav() {
   const isUser = loginState();
   const loginText = isUser ? '로그아웃' : '로그인';
 
   return (
-    <nav className="flex h-[10%] justify-between">
-      <Link href="/" className="m-6">
-        아름다움
-      </Link>
-      <div className="m-6">
-        <Link href="/board/1" className="m-6">
-          게시판
-        </Link>
-        {isUser && (
-          <Link href="/mypage/my-info" className="m-6">
-            마이페이지
-          </Link>
-        )}
-        <Link href={`/auth?${isUser}`} className="m-6">
-          {loginText}
-        </Link>
+    <nav className="m-6 flex h-[10%] justify-between">
+      <ActiveLink path="/">아름다움</ActiveLink>
+      <div className="*:m-6">
+        <ActiveLink path="/board/1">게시판</ActiveLink>
+        {isUser && <ActiveLink path="/mypage/my-info">마이페이지</ActiveLink>}
+        <ActiveLink path={`/auth?${isUser}`}>{loginText}</ActiveLink>
       </div>
     </nav>
   );

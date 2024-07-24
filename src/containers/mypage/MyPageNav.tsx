@@ -1,17 +1,11 @@
-import Link from 'next/link';
+import ActiveLink from '@/components/ActiveLink';
 
 function MyPageNav() {
   return (
     <section className="flex h-1/6 w-full justify-center *:mx-10">
-      <Link href="/mypage/my-info" className="active: text-white">
-        나의 정보
-      </Link>
-      <Link href="/mypage/post" className="target: text-white">
-        게시글
-      </Link>
-      <Link href="/mypage/comment" className="target: text-white">
-        댓글
-      </Link>
+      <ActiveLink path="/mypage/my-info">나의 정보</ActiveLink>
+      <ActiveLink path="/mypage/post">게시글</ActiveLink>
+      <ActiveLink path="/mypage/comment">댓글</ActiveLink>
     </section>
   );
 }
