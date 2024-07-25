@@ -1,7 +1,26 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
+
+import createClient from '@/lib/supabase/client';
 
 function Home() {
+  useEffect(() => {
+    const supabase = createClient();
+
+    const userInfo = async () => {
+      const result = await supabase.auth.getUser();
+
+      if (result.data.user) {
+        localStorage.setItem('user_id', result.data.user.id);
+      } else localStorage.removeItem('user_id');
+    };
+
+    userInfo();
+  }, []);
+
   return (
     <main>
       <h1 className="m-10 text-4xl text-white">아름다움</h1>
