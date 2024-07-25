@@ -8,7 +8,7 @@ function MyPageLayout({
   return (
     <main className="h-[80%] px-10">
       <MyPageNav />
-      <section className="h-5/6 rounded-xl bg-white">{children}</section>
+      <section className="h-4/5 rounded-xl bg-white">{children}</section>
     </main>
   );
 }

@@ -38,14 +38,14 @@ function SaveFile({ title, reply, onClose, openToastSave }: Props) {
   };
 
   return (
-    <div className=" fixed left-0 top-0 z-50 grid h-full w-full items-center justify-items-center bg-gray/50 *:text-white">
+    <div className=" fixed left-0 top-0 z-50 grid h-full w-full items-center justify-items-center bg-gray/50 text-white">
       <div
         ref={domRef}
         className="flex h-3/4 w-2/5 flex-col overflow-hidden rounded-lg bg-deepBraun"
       >
         <h2 className="mb-2 mt-4 text-gray">{today} 나를 알아보는 시간 </h2>
         <h3 className="text-lg">{title}</h3>
-        <div className="note m-5 h-4/5 overflow-auto rounded-xl bg-white *:text-black">
+        <div className="note m-5 h-4/5 overflow-auto rounded-xl bg-white text-black">
           <p>{reply}</p>
         </div>
         <div>
