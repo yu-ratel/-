@@ -11,7 +11,11 @@ function Nav() {
       <ActiveLink path="/">아름다움</ActiveLink>
       <div className="*:m-6">
         <ActiveLink path="/board/1">게시판</ActiveLink>
-        {isUser && <ActiveLink path="/mypage/info">마이페이지</ActiveLink>}
+        {isUser && (
+          <ActiveLink path="/mypage/info" myPage>
+            마이페이지
+          </ActiveLink>
+        )}
         <ActiveLink path={`/auth?${isUser}`}>{loginText}</ActiveLink>
       </div>
     </nav>
