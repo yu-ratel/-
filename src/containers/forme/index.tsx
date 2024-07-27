@@ -27,9 +27,9 @@ function ForMe() {
     setSave(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (curTitle: string, curReply: string) => {
     openToastSubmit('작성 되었습니다.');
-    createReplies(title, reply);
+    createReplies(curTitle, curReply);
     askReplyRef.current!.clearText();
   };
 
@@ -46,7 +46,7 @@ function ForMe() {
       if (curTitle === '질문을 선택해주세요!') onClicked('질문을 선택해주세요.');
       if (curTitle !== '질문을 선택해주세요!' && curReply) {
         if (variant === 'submit') {
-          handleSubmit();
+          handleSubmit(curTitle, curReply);
         }
         if (variant === 'save') {
           handleSave();
