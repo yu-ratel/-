@@ -17,7 +17,7 @@ export const GET = async (request: Request) => {
   const data = await supabase
     .from('user_comment_rls')
     .select('*, user_post_rls (question)')
-    .order('id', { ascending: true })
+    .order('updated_at', { ascending: false })
     .range(startNum, endNum);
 
   return NextResponse.json({ totalCount: totalCount.count, ...data, limit });

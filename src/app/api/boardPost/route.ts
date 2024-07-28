@@ -29,7 +29,7 @@ export const GET = async (request: Request) => {
       .from('user_post_rls')
       .select('*')
       .is('deleted_at', null)
-      .order('id', { ascending: true })
+      .order('updated_at', { ascending: false })
       .range(startNum, endNum);
 
     if (userId) data.eq('user_id', userId);
