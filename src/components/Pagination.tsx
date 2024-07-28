@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 
+import { formatBasePath } from '@/utils/formatDate';
+
 interface Props {
   totalCount: number;
   limit: number;
@@ -10,7 +12,7 @@ interface Props {
 
 function Pagination({ totalCount, limit }: Props) {
   const { page } = useParams();
-  const basePath = usePathname().split('/').slice(0, -1).join('/');
+  const basePath = formatBasePath(usePathname());
   const totalPage = Math.ceil(totalCount / limit);
   const pageNumbers = Array.from({ length: totalPage }, (_, i) => i + 1);
 

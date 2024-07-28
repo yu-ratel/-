@@ -2,8 +2,10 @@
 
 /* eslint-disable react/jsx-props-no-spreading */
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { AnchorHTMLAttributes } from 'react';
+
+import { formatBasePath } from '@/utils/formatDate';
 
 interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   path: string;
@@ -12,9 +14,14 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 function ActiveLink({ path, myPage, children, ...props }: Props) {
   const router = usePathname();
+  const { page } = useParams();
 
   const isActive = (curPath: string) => {
     if (myPage && router.includes('mypage')) return true;
+
+    if (page) {
+      return formatBasePath(router) === formatBasePath(curPath);
+    }
 
     return router === curPath;
   };

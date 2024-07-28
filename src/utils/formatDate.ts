@@ -10,3 +10,7 @@ export const formatToday = () => {
 
   return `${year}-${month}-${day}`;
 };
+
+export const formatBasePath = (url: string) => {
+  return url.split('/').slice(0, -1).join('/');
+};
