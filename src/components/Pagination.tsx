@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 interface Props {
   totalCount: number;
@@ -10,6 +10,7 @@ interface Props {
 
 function Pagination({ totalCount, limit }: Props) {
   const { page } = useParams();
+  const basePath = usePathname().split('/').slice(0, -1).join('/');
   const totalPage = Math.ceil(totalCount / limit);
   const pageNumbers = Array.from({ length: totalPage }, (_, i) => i + 1);
 
@@ -20,7 +21,7 @@ function Pagination({ totalCount, limit }: Props) {
           className={`w-10 rounded-lg text-center ${Number(page) === number ? ' bg-white' : ''}`}
           key={number}
         >
-          <Link href={`/board/${number}`}>{number}</Link>
+          <Link href={`${basePath}/${number}`}>{number}</Link>
         </li>
       ))}
     </ol>
