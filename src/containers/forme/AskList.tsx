@@ -1,24 +1,13 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-
 import { Database } from '@/types/supabase';
 
 type AskDto = Database['public']['Tables']['question']['Row'];
 
-function AskList({ onClick }: { onClick: (ask: string) => void }) {
-  const [data, setData] = useState<AskDto[]>([]);
+interface Props {
+  data: AskDto[];
+  onClick: (ask: string) => void;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/questionnaire`);
-      const result = await response.json();
-      setData(result.data);
-    };
-
-    fetchData();
-  }, []);
-
+function AskList({ data, onClick }: Props) {
   return (
     <section className="m-10 grid h-[28rem] w-[30rem] overflow-auto bg-white">
       <h1 className="h-[5.5rem] content-center bg-deepBraun text-center text-white">
