@@ -19,7 +19,6 @@ export const ToastContext = createContext<Props>({
 
 function ToastContextProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
-  const toastTimer = useRef<NodeJS.Timeout>();
   const toastIdRef = useRef(0);
 
   const openToast = useCallback((message: string) => {
@@ -28,13 +27,9 @@ function ToastContextProvider({ children }: { children: React.ReactNode }) {
     const newToast = { id, message };
     setToasts((prev) => [...prev, newToast]);
 
-    if (toastTimer.current) {
-      clearTimeout(toastTimer.current);
-    }
-
-    toastTimer.current = setTimeout(() => {
+    setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
-    }, 2000);
+    }, 3000);
   }, []);
 
   const value = useMemo(() => ({ openToast }), [openToast]);
@@ -42,9 +37,11 @@ function ToastContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      {toasts.map((toast) => (
-        <ToastPopUp key={toast.id} message={toast.message} />
-      ))}
+      <div className="fixed top-0 mt-10 flex w-full flex-col items-center">
+        {toasts.map((toast) => (
+          <ToastPopUp key={toast.id} message={toast.message} />
+        ))}
+      </div>
     </ToastContext.Provider>
   );
 }

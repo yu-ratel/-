@@ -2,19 +2,20 @@ import { toPng } from 'html-to-image';
 import { useRef, useState } from 'react';
 
 import Button from '@/components/Button';
+import useToast from '@/hooks/useToast';
 import { formatToday } from '@/utils/formatDate';
 
 interface Props {
   title: string;
   reply: string;
   onClose: () => void;
-  openToastSave: (message: string) => void;
 }
 
-function SaveFile({ title, reply, onClose, openToastSave }: Props) {
+function SaveFile({ title, reply, onClose }: Props) {
   const [isButton, setIsButton] = useState(false);
   const today = formatToday();
   const domRef = useRef<HTMLDivElement>(null);
+  const { openToast } = useToast();
 
   const onPng = () => {
     if (domRef.current) {
@@ -26,10 +27,10 @@ function SaveFile({ title, reply, onClose, openToastSave }: Props) {
           link.download = `${title}-${today}.png`;
           link.href = dataUrl;
           link.click();
-          openToastSave('저장 되었습니다!');
+          openToast('저장 되었습니다!');
         })
         .catch(() => {
-          openToastSave('다시 시도해주세요.');
+          openToast('다시 시도해주세요.');
         })
         .finally(() => {
           onClose();

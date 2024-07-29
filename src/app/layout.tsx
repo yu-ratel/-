@@ -24,12 +24,12 @@ function RootLayout({
 }>) {
   return (
     <html lang="kr">
-      <ToastContextProvider>
-        <body className={notoSerifKr.className}>
+      <body className={notoSerifKr.className}>
+        <ToastContextProvider>
           <Nav />
           {children}
-        </body>
-      </ToastContextProvider>
+        </ToastContextProvider>
+      </body>
     </html>
   );
 }

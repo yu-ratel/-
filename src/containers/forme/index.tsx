@@ -10,7 +10,6 @@ import { Database } from '@/types/supabase';
 import AskList from './AskList';
 import AskReply from './AskReply';
 import SaveFile from './SaveFile';
-import ToastPopUp from './ToastPopUp';
 
 type AskDto = Database['public']['Tables']['question']['Row'];
 
@@ -29,8 +28,7 @@ function ForMe({ data }: Props) {
   const [isSave, setSave] = useState(false);
   const askReplyRef = useRef<AskReplyHandle>(null);
   const { createReplies } = useRepliesController();
-  const { isToast: isToastSubmit, message: messageSubmit, openToast: openToastSubmit } = useToast();
-  const { isToast: isToastSave, message: messageSave, openToast: openToastSave } = useToast();
+  const { openToast } = useToast();
 
   const onClose = () => {
     setSave(false);
@@ -45,22 +43,25 @@ function ForMe({ data }: Props) {
   };
 
   const handleSubmit = (curTitle: string, curReply: string) => {
-    openToastSubmit('작성 되었습니다.');
+    openToast('작성 되었습니다.');
     createReplies(curTitle, curReply);
     askReplyRef.current!.clearText();
   };
 
   const handleSave = () => {
-    return isSave ? openToastSave('저장이 완료 되었습니다.') : setSave(true);
+    return isSave ? openToast('저장이 완료 되었습니다.') : setSave(true);
   };
 
-  const handleForme = (variant: string, onClicked: (message: string) => void) => {
+  const handleForme = (variant: string) => {
     if (askReplyRef.current) {
       const [curTitle, curReply] = askReplyRef.current.getText();
       setPost([curTitle, curReply]);
 
-      if (curReply === '') onClicked('글을 작성해주세요.');
-      if (curTitle === '질문을 선택해주세요!') onClicked('질문을 선택해주세요.');
+      if (curReply === '') {
+        openToast('글을 작성해주세요.');
+        return;
+      }
+      if (curTitle === '질문을 선택해주세요!') openToast('질문을 선택해주세요.');
       if (curTitle !== '질문을 선택해주세요!' && curReply) {
         if (variant === 'submit') {
           handleSubmit(curTitle, curReply);
@@ -80,17 +81,9 @@ function ForMe({ data }: Props) {
           <AskList onClick={handleAsk} data={data} />
         </section>
         <section className="m-10 text-center">
-          <Button onClick={() => handleForme('submit', openToastSubmit)}>
-            작성하기
-            {isToastSubmit && <ToastPopUp message={messageSubmit} />}
-          </Button>
-          <Button onClick={() => handleForme('save', openToastSave)}>
-            저장하기
-            {isToastSave && <ToastPopUp message={messageSave} />}
-          </Button>
-          {isSave && (
-            <SaveFile title={title} reply={reply} onClose={onClose} openToastSave={openToastSave} />
-          )}
+          <Button onClick={() => handleForme('submit')}>작성하기</Button>
+          <Button onClick={() => handleForme('save')}>저장하기</Button>
+          {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}
         </section>
       </section>
     </main>
