@@ -1,8 +1,10 @@
 import { Noto_Serif_KR } from 'next/font/google';
 
 import Nav from '@/components/Nav';
+import ToastContextProvider from '@/contexts/ToastContext';
 
 import type { Metadata } from 'next';
+
 import '@/styles/globals.css';
 
 const notoSerifKr = Noto_Serif_KR({
@@ -22,10 +24,12 @@ function RootLayout({
 }>) {
   return (
     <html lang="kr">
-      <body className={notoSerifKr.className}>
-        <Nav />
-        {children}
-      </body>
+      <ToastContextProvider>
+        <body className={notoSerifKr.className}>
+          <Nav />
+          {children}
+        </body>
+      </ToastContextProvider>
     </html>
   );
 }
