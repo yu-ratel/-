@@ -25,7 +25,7 @@ export const create = async (question: string, replie: string) => {
   return result.data;
 };
 
-export const update = async (id: string, replie: string) => {
+export const update = async (id: number, replie: string) => {
   const supabase = await creatServer();
 
   const result = await supabase
@@ -42,7 +42,7 @@ export const update = async (id: string, replie: string) => {
   return result.data;
 };
 
-export const deleted = async (id: string) => {
+export const softDelete = async (id: number) => {
   const supabase = await creatServer();
 
   const result = await supabase

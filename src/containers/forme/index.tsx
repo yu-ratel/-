@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 
 import Button from '@/components/Button';
-import useRepliesController from '@/hooks/useRepliesController';
+import usePostController from '@/hooks/usePostController';
 import useToast from '@/hooks/useToast';
 import { Database } from '@/types/supabase';
 
@@ -27,7 +27,7 @@ function ForMe({ data }: Props) {
   const [[title, reply], setPost] = useState<[string, string]>(['', '']);
   const [isSave, setSave] = useState(false);
   const askReplyRef = useRef<AskReplyHandle>(null);
-  const { createReplies } = useRepliesController();
+  const { createPost } = usePostController();
   const { openToast } = useToast();
 
   const onClose = () => {
@@ -44,7 +44,7 @@ function ForMe({ data }: Props) {
 
   const handleSubmit = (curTitle: string, curReply: string) => {
     openToast('작성 되었습니다.');
-    createReplies(curTitle, curReply);
+    createPost(curTitle, curReply);
     askReplyRef.current!.clearText();
   };
 

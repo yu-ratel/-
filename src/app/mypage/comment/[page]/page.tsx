@@ -19,7 +19,7 @@ const fetchData = async (page: number) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/mypageComment?page=${curPage}`,
     {
-      next: { tags: ['board'] },
+      next: { tags: ['post'] },
     },
   );
 
