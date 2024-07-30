@@ -35,7 +35,7 @@ function MyComment({ data, totalCount, limit, page }: Props) {
             <Link href={`/post/${item.post_id}`} className="flex w-[96%] flex-grow *:w-[25%]">
               <li>{startPostNumber + index}</li>
               <li className="truncate">{item.user_post_rls.question}</li>
-              <li>{item.comment}</li>
+              <li className="truncate">{item.comment}</li>
               <li>{formatStrDate(item.updated_at)}</li>
             </Link>
             <Button variant="mypageClear" onClick={() => deletedComment(item.id)}>

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 
+import AlertBox from '@/components/AlertBox';
 import Button from '@/components/Button';
 import usePostController from '@/hooks/usePostController';
 import useToast from '@/hooks/useToast';
@@ -15,6 +16,7 @@ type AskDto = Database['public']['Tables']['question']['Row'];
 
 interface Props {
   data: AskDto[];
+  isLogin: boolean;
 }
 
 type AskReplyHandle = {
@@ -23,9 +25,10 @@ type AskReplyHandle = {
   askClick: (ask: string) => void;
 };
 
-function ForMe({ data }: Props) {
+function ForMe({ data, isLogin }: Props) {
   const [[title, reply], setPost] = useState<[string, string]>(['', '']);
   const [isSave, setSave] = useState(false);
+  const [isAlert, setAlert] = useState(false);
   const askReplyRef = useRef<AskReplyHandle>(null);
   const { createPost } = usePostController();
   const { openToast } = useToast();
@@ -64,6 +67,10 @@ function ForMe({ data }: Props) {
       if (curTitle === '질문을 선택해주세요!') openToast('질문을 선택해주세요.');
       if (curTitle !== '질문을 선택해주세요!' && curReply) {
         if (variant === 'submit') {
+          if (!isLogin) {
+            setAlert(true);
+            return;
+          }
           handleSubmit(curTitle, curReply);
         }
         if (variant === 'save') {
@@ -84,6 +91,7 @@ function ForMe({ data }: Props) {
           <Button onClick={() => handleForme('submit')}>작성하기</Button>
           <Button onClick={() => handleForme('save')}>저장하기</Button>
           {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}
+          {isAlert && <AlertBox onClose={() => setAlert(false)} />}
         </section>
       </section>
     </main>

@@ -1,5 +1,6 @@
 import ForMe from '@/containers/forme';
 import { Database } from '@/types/supabase';
+import loginState from '@/utils/loginState';
 
 type AskDto = Database['public']['Tables']['question']['Row'];
 
@@ -15,8 +16,9 @@ const fetchData = async () => {
 
 async function ForMePage() {
   const { data }: Props = await fetchData();
+  const isLogin = loginState();
 
-  return <ForMe data={data} />;
+  return <ForMe data={data} isLogin={isLogin} />;
 }
 
 export default ForMePage;

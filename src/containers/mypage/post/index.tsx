@@ -34,7 +34,7 @@ function MyPost({ data, totalCount, limit, page }: Props) {
             <Link href={`/post/${item.id}`} className="flex w-[96%] flex-grow *:w-[25%]">
               <li>{startPostNumber + index}</li>
               <li className="truncate">{item.question}</li>
-              <li>{item.replie}</li>
+              <li className="truncate">{item.replie}</li>
               <li>{formatStrDate(item.updated_at)}</li>
             </Link>
             <Button variant="mypageClear" onClick={() => onDelete(item.id)}>
