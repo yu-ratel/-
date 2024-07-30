@@ -40,10 +40,6 @@ function Comment({ data, postId, isLogin }: Props) {
     setSelectedId(id);
   };
 
-  const onClear = (id: number) => {
-    deletedComment(id);
-  };
-
   return (
     <section className="ml-2 mr-10 mt-10 h-4/5 w-2/5 bg-white">
       <div className="h-4/5 overflow-auto">
@@ -61,7 +57,7 @@ function Comment({ data, postId, isLogin }: Props) {
                     <Button variant="update" onClick={() => onUpdate(comment.id)}>
                       <UpdatePen />
                     </Button>
-                    <Button variant="update" onClick={() => onClear(comment.id)}>
+                    <Button variant="update" onClick={() => deletedComment(comment.id)}>
                       <Clear />
                     </Button>
                   </>

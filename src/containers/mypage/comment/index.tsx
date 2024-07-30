@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
+import useCommentController from '@/hooks/useCommentController';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
@@ -22,6 +25,7 @@ interface Props {
 
 function MyComment({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
+  const { deletedComment } = useCommentController();
 
   return (
     <MyPageBoard isPost={false} totalCount={totalCount} limit={limit}>
@@ -34,7 +38,7 @@ function MyComment({ data, totalCount, limit, page }: Props) {
               <li>{item.comment}</li>
               <li>{formatStrDate(item.updated_at)}</li>
             </Link>
-            <Button variant="mypageClear">
+            <Button variant="mypageClear" onClick={() => deletedComment(item.id)}>
               <TrashIcon />
             </Button>
           </ol>

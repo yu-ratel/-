@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
+import usePostController from '@/hooks/usePostController';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
@@ -18,6 +19,12 @@ interface Props {
 
 function MyPost({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
+  const { deletePost } = usePostController();
+
+  const onDelete = (id: number) => {
+    deletePost(id);
+    window.location.reload();
+  };
 
   return (
     <MyPageBoard isPost totalCount={totalCount} limit={limit}>
@@ -30,7 +37,7 @@ function MyPost({ data, totalCount, limit, page }: Props) {
               <li>{item.replie}</li>
               <li>{formatStrDate(item.updated_at)}</li>
             </Link>
-            <Button variant="mypageClear">
+            <Button variant="mypageClear" onClick={() => onDelete(item.id)}>
               <TrashIcon />
             </Button>
           </ol>
