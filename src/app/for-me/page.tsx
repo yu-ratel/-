@@ -1,6 +1,6 @@
 import ForMe from '@/containers/forme';
 import { Database } from '@/types/supabase';
-import loginState from '@/utils/loginState';
+import { loginState } from '@/utils/loginState';
 
 type AskDto = Database['public']['Tables']['question']['Row'];
 
