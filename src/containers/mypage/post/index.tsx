@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
 import usePostController from '@/hooks/usePostController';
+import useToast from '@/hooks/useToast';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
@@ -20,11 +22,21 @@ interface Props {
 function MyPost({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
   const { deletePost } = usePostController();
+  const { openToast } = useToast();
 
-  const onDelete = (id: number) => {
-    deletePost(id);
+  const onDelete = async (id: number) => {
+    await deletePost(id);
+    localStorage.setItem('toast', 'true');
     window.location.reload();
   };
+
+  useEffect(() => {
+    const isToast = localStorage.getItem('toast');
+    if (isToast === 'true') {
+      openToast('삭제가 완료되었습니다.');
+      localStorage.removeItem('toast');
+    }
+  }, [openToast]);
 
   return (
     <MyPageBoard isPost totalCount={totalCount} limit={limit}>

@@ -46,7 +46,7 @@ function ForMe({ data, isLogin }: Props) {
   };
 
   const handleSubmit = (curTitle: string, curReply: string) => {
-    openToast('작성 되었습니다.');
+    openToast('작성이 완료되었습니다.');
     createPost(curTitle, curReply);
     askReplyRef.current!.clearText();
   };

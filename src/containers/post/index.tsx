@@ -50,9 +50,7 @@ function Post({ data, isLogin, userId }: Props) {
               </Button>
             )}
           </div>
-          {isUpdate && (
-            <PostBox postId={data.id} comment={data.replie} closeCommentWindow={onClose} />
-          )}
+          {isUpdate && <PostBox postId={data.id} comment={data.replie} closePostWindow={onClose} />}
         </section>
         <Comment data={data.user_comment_rls} postId={data.id} isLogin={isLogin} userId={userId} />
       </section>

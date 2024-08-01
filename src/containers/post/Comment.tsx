@@ -8,6 +8,7 @@ import { MdOutlineClear as Clear } from 'react-icons/md';
 import AlertBox from '@/components/AlertBox';
 import Button from '@/components/Button';
 import useCommentController from '@/hooks/useCommentController';
+import useToast from '@/hooks/useToast';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
 
@@ -26,6 +27,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { deletedComment } = useCommentController();
+  const { openToast } = useToast();
 
   const onCommentWindow = () => {
     setCommentWindow(true);
@@ -38,6 +40,11 @@ function Comment({ data, postId, isLogin, userId }: Props) {
 
   const onUpdate = (id: number) => {
     setSelectedId(id);
+  };
+
+  const onDeletedComment = async (id: number) => {
+    await deletedComment(id);
+    openToast('삭제가 완료되었습니다.');
   };
 
   return (
@@ -57,7 +64,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
                     <Button variant="update" onClick={() => onUpdate(comment.id)}>
                       <UpdatePen />
                     </Button>
-                    <Button variant="update" onClick={() => deletedComment(comment.id)}>
+                    <Button variant="update" onClick={() => onDeletedComment(comment.id)}>
                       <Clear />
                     </Button>
                   </>
