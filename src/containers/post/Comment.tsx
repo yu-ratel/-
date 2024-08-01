@@ -19,10 +19,10 @@ interface Props {
   data: CommentDto[];
   postId: number;
   isLogin: boolean;
+  userId: string | undefined;
 }
 
-function Comment({ data, postId, isLogin }: Props) {
-  const userId = localStorage.getItem('user_id');
+function Comment({ data, postId, isLogin, userId }: Props) {
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { deletedComment } = useCommentController();

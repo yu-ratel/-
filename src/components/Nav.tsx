@@ -1,4 +1,4 @@
-import loginState from '@/utils/loginState';
+import { loginState } from '@/utils/loginState';
 
 import ActiveLink from './ActiveLink';
 

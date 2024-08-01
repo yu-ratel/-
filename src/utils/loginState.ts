@@ -1,7 +1,14 @@
 import { headers } from 'next/headers';
 
-const loginState = () => {
+import creatServer from '@/lib/supabase/server';
+
+export const loginState = () => {
   return headers().get('isUser') === 'true';
 };
 
-export default loginState;
+export const getUserId = async () => {
+  const supabase = await creatServer();
+  const result = await supabase.auth.getUser();
+
+  return result.data.user?.id;
+};
