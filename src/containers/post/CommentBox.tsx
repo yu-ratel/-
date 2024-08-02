@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, ChangeEvent } from 'react';
 
 import Button from '@/components/Button';
 import useCommentController from '@/hooks/useCommentController';
+import useLoading from '@/hooks/useLoading';
 import useToast from '@/hooks/useToast';
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
 function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
   const [text, setText] = useState('');
   const { updateComment, createComment } = useCommentController();
+  const { onLoading } = useLoading();
   const { openToast } = useToast();
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -36,11 +38,11 @@ function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
 
   const onSubmit = async () => {
     if (postId) {
-      await createComment(postId, text);
+      await onLoading(() => createComment(postId, text));
       openToast('작성이 완료되었습니다.');
     }
     if (curId) {
-      await updateComment(curId, text);
+      await onLoading(() => updateComment(curId, text));
       openToast('수정이 완료되었습니다.');
     }
     setText('');

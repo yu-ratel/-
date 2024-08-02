@@ -5,6 +5,7 @@ import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
 import useCommentController from '@/hooks/useCommentController';
+import useLoading from '@/hooks/useLoading';
 import useToast from '@/hooks/useToast';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
@@ -27,10 +28,11 @@ interface Props {
 function MyComment({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
   const { deletedComment } = useCommentController();
+  const { onLoading } = useLoading();
   const { openToast } = useToast();
 
   const onDeletedComment = async (id: number) => {
-    await deletedComment(id);
+    await onLoading(() => deletedComment(id));
     openToast('삭제가 완료되었습니다.');
   };
 

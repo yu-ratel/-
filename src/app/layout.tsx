@@ -1,6 +1,7 @@
 import { Noto_Serif_KR } from 'next/font/google';
 
 import Nav from '@/components/Nav';
+import LoadingContextProvider from '@/contexts/LoadingContext';
 import ToastContextProvider from '@/contexts/ToastContext';
 
 import type { Metadata } from 'next';
@@ -26,8 +27,10 @@ function RootLayout({
     <html lang="kr">
       <body className={notoSerifKr.className}>
         <ToastContextProvider>
-          <Nav />
-          {children}
+          <LoadingContextProvider>
+            <Nav />
+            {children}
+          </LoadingContextProvider>
         </ToastContextProvider>
       </body>
     </html>

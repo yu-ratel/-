@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
+import useLoading from '@/hooks/useLoading';
 import usePostController from '@/hooks/usePostController';
 import useToast from '@/hooks/useToast';
 import { Database } from '@/types/supabase';
@@ -22,10 +23,11 @@ interface Props {
 function MyPost({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
   const { deletePost } = usePostController();
+  const { onLoading } = useLoading();
   const { openToast } = useToast();
 
   const onDelete = async (id: number) => {
-    await deletePost(id);
+    await onLoading(() => deletePost(id));
     localStorage.setItem('toast', 'true');
     window.location.reload();
   };

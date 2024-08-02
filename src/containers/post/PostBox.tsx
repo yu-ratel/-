@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, ChangeEvent } from 'react';
 
 import Button from '@/components/Button';
+import useLoading from '@/hooks/useLoading';
 import usePostController from '@/hooks/usePostController';
 import useToast from '@/hooks/useToast';
 
@@ -14,6 +15,7 @@ interface Props {
 function PostBox({ postId, comment, closePostWindow }: Props) {
   const [text, setText] = useState('');
   const { updatePost } = usePostController();
+  const { onLoading } = useLoading();
   const { openToast } = useToast();
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -34,7 +36,7 @@ function PostBox({ postId, comment, closePostWindow }: Props) {
   };
 
   const onSubmit = async () => {
-    await updatePost(postId, text);
+    await onLoading(() => updatePost(postId, text));
     openToast('수정이 완료되었습니다.');
     closePostWindow();
   };
