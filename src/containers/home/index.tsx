@@ -17,7 +17,14 @@ function Home() {
           </ActiveLink>
         </div>
         <figure className="relative h-96 w-96 justify-self-center">
-          <Image src="/images/postCard.png" alt="postCard" layout="fill" objectFit="cover" />
+          <Image
+            src="/images/postCard.png"
+            alt="postCard"
+            fill
+            priority
+            className="object-cover"
+            sizes="100%"
+          />
         </figure>
       </section>
     </main>
