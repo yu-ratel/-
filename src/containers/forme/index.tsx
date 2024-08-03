@@ -87,7 +87,7 @@ function ForMe({ data, isLogin }: Props) {
           <AskReply ref={askReplyRef} />
           <AskList onClick={handleAsk} data={data} />
         </section>
-        <section className="m-10 text-center">
+        <section className=" text-center">
           <Button onClick={() => handleForme('submit')}>작성하기</Button>
           <Button onClick={() => handleForme('save')}>저장하기</Button>
           {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}

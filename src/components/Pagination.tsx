@@ -20,7 +20,7 @@ function Pagination({ totalCount, limit }: Props) {
     <ol className="flex justify-center">
       {pageNumbers.map((number) => (
         <li
-          className={`w-10 rounded-lg text-center ${Number(page) === number ? ' bg-white' : ''}`}
+          className={`w-10 rounded-lg text-center ${Number(page) === number ? ' bg-white shadow-md shadow-braun' : ''}`}
           key={number}
         >
           <Link href={`${basePath}/${number}`}>{number}</Link>
