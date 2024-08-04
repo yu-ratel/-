@@ -3,8 +3,11 @@
 import { useState } from 'react';
 
 import Button from '@/components/Button';
+import useToast from '@/hooks/useToast';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
+
+import SaveFile from '../forme/SaveFile';
 
 import Comment from './Comment';
 import PostBox from './PostBox';
@@ -24,13 +27,23 @@ interface Props {
 
 function Post({ data, isLogin, userId }: Props) {
   const [isUpdate, setUpdate] = useState(false);
+  const [isSave, setSave] = useState(false);
+  const { openToast } = useToast();
 
   const onUpdate = () => {
     setUpdate(true);
   };
 
-  const onClose = () => {
+  const handleSave = () => {
+    return isSave ? openToast('저장이 완료 되었습니다.') : setSave(true);
+  };
+
+  const onUpdateClose = () => {
     setUpdate(false);
+  };
+
+  const onSaveclose = () => {
+    setSave(false);
   };
 
   return (
@@ -45,12 +58,22 @@ function Post({ data, isLogin, userId }: Props) {
           <p className="h-[70%]">{data.replie}</p>
           <div className="text-center">
             {userId === data.user_id && (
-              <Button variant="update" className="text-lg text-[gray]" onClick={onUpdate}>
-                수정하기
-              </Button>
+              <div className="flex justify-evenly">
+                <Button variant="update" className="text-lg text-[gray]" onClick={onUpdate}>
+                  게시글 수정
+                </Button>
+                <Button variant="update" className="text-lg text-[gray]" onClick={handleSave}>
+                  이미지 저장
+                </Button>
+                {isSave && (
+                  <SaveFile title={data.question} reply={data.replie} onClose={onSaveclose} />
+                )}
+              </div>
             )}
           </div>
-          {isUpdate && <PostBox postId={data.id} comment={data.replie} closePostWindow={onClose} />}
+          {isUpdate && (
+            <PostBox postId={data.id} comment={data.replie} closePostWindow={onUpdateClose} />
+          )}
         </section>
         <Comment data={data.user_comment_rls} postId={data.id} isLogin={isLogin} userId={userId} />
       </section>

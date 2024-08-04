@@ -88,8 +88,8 @@ function ForMe({ data, isLogin }: Props) {
           <AskList onClick={handleAsk} data={data} />
         </section>
         <section className=" text-center">
-          <Button onClick={() => handleForme('submit')}>작성하기</Button>
-          <Button onClick={() => handleForme('save')}>저장하기</Button>
+          <Button onClick={() => handleForme('submit')}>게시글 작성</Button>
+          <Button onClick={() => handleForme('save')}>이미지 저장</Button>
           {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}
           {isAlert && <AlertBox onClose={() => setAlert(false)} />}
         </section>
