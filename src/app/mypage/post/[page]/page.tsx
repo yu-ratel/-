@@ -1,9 +1,6 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 import MyPost from '@/containers/mypage/post';
 import { Database } from '@/types/supabase';
+import { getUserId } from '@/utils/loginState';
 
 type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 
@@ -15,13 +12,14 @@ interface Props {
 
 const fetchData = async (page: number) => {
   const curPage = Number(page);
-  const userId = localStorage.getItem('user_id');
+  const userId = await getUserId();
+
   const headers: HeadersInit = {
-    user_id: userId || '',
+    user_id: userId,
   };
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/boardPost?page=${curPage}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/mypageBoardPost?page=${curPage}`,
     {
       next: { tags: ['board'] },
       headers,
@@ -31,33 +29,10 @@ const fetchData = async (page: number) => {
   return response.json();
 };
 
-function MyPostPage({ params }: { params: { page: number } }) {
-  const [state, setState] = useState<Props>({
-    data: [],
-    totalCount: 0,
-    limit: 0,
-  });
+async function MyPostPage({ params }: { params: { page: number } }) {
+  const { data, totalCount, limit }: Props = await fetchData(params.page);
 
-  useEffect(() => {
-    const fetch = async () => {
-      const result: Props = await fetchData(params.page);
-      setState({
-        data: result.data,
-        totalCount: result.totalCount,
-        limit: result.limit,
-      });
-    };
-    fetch();
-  }, [params.page]);
-
-  return (
-    <MyPost
-      data={state.data}
-      totalCount={state.totalCount}
-      limit={state.limit}
-      page={params.page}
-    />
-  );
+  return <MyPost data={data} totalCount={totalCount} limit={limit} page={params.page} />;
 }
 
 export default MyPostPage;

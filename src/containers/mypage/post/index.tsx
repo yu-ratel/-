@@ -1,5 +1,6 @@
+'use client';
+
 import Link from 'next/link';
-import { useEffect } from 'react';
 import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
 import Button from '@/components/Button';
@@ -28,35 +29,30 @@ function MyPost({ data, totalCount, limit, page }: Props) {
 
   const onDelete = async (id: number) => {
     await onLoading(() => deletePost(id));
-    localStorage.setItem('toast', 'true');
-    window.location.reload();
+    openToast('삭제가 완료되었습니다.');
   };
-
-  useEffect(() => {
-    const isToast = localStorage.getItem('toast');
-    if (isToast === 'true') {
-      openToast('삭제가 완료되었습니다.');
-      localStorage.removeItem('toast');
-    }
-  }, [openToast]);
 
   return (
     <MyPageBoard isPost totalCount={totalCount} limit={limit}>
-      {data.map((item, index) => {
-        return (
-          <ol key={item.id} className="mb-3 flex items-center text-center *:my-1.5">
-            <Link href={`/post/${item.id}`} className="flex w-[96%] flex-grow *:w-[25%]">
-              <li>{startPostNumber + index}</li>
-              <li className="truncate">{item.question}</li>
-              <li className="truncate">{item.replie}</li>
-              <li>{formatStrDate(item.updated_at)}</li>
-            </Link>
-            <Button variant="mypageClear" onClick={() => onDelete(item.id)}>
-              <TrashIcon />
-            </Button>
-          </ol>
-        );
-      })}
+      {data.length ? (
+        data.map((item, index) => {
+          return (
+            <ol key={item.id} className="mb-3 flex items-center text-center *:my-1.5">
+              <Link href={`/post/${item.id}`} className="flex w-[96%] flex-grow *:w-[25%]">
+                <li>{startPostNumber + index}</li>
+                <li className="truncate">{item.question}</li>
+                <li className="truncate">{item.replie}</li>
+                <li>{formatStrDate(item.updated_at)}</li>
+              </Link>
+              <Button variant="mypageClear" onClick={() => onDelete(item.id)}>
+                <TrashIcon />
+              </Button>
+            </ol>
+          );
+        })
+      ) : (
+        <div className="h-full content-center text-center">새로운 게시글을 남겨주세요 📝</div>
+      )}
     </MyPageBoard>
   );
 }

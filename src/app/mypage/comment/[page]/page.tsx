@@ -1,5 +1,6 @@
 import MyComment from '@/containers/mypage/comment';
 import { Database } from '@/types/supabase';
+import { getUserId } from '@/utils/loginState';
 
 type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'] & {
   user_post_rls: {
@@ -15,11 +16,17 @@ interface Props {
 
 const fetchData = async (page: number) => {
   const curPage = Number(page);
+  const userId = await getUserId();
+
+  const headers: HeadersInit = {
+    user_id: userId,
+  };
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/mypageComment?page=${curPage}`,
     {
       next: { tags: ['post'] },
+      headers,
     },
   );
 

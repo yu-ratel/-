@@ -38,21 +38,25 @@ function MyComment({ data, totalCount, limit, page }: Props) {
 
   return (
     <MyPageBoard isPost={false} totalCount={totalCount} limit={limit}>
-      {data.map((item, index) => {
-        return (
-          <ol key={item.id} className="mb-3 flex items-center text-center *:my-1.5">
-            <Link href={`/post/${item.post_id}`} className="flex w-[96%] flex-grow *:w-[25%]">
-              <li>{startPostNumber + index}</li>
-              <li className="truncate">{item.user_post_rls.question}</li>
-              <li className="truncate">{item.comment}</li>
-              <li>{formatStrDate(item.updated_at)}</li>
-            </Link>
-            <Button variant="mypageClear" onClick={() => onDeletedComment(item.id)}>
-              <TrashIcon />
-            </Button>
-          </ol>
-        );
-      })}
+      {data.length ? (
+        data.map((item, index) => {
+          return (
+            <ol key={item.id} className="mb-3 flex items-center text-center *:my-1.5">
+              <Link href={`/post/${item.post_id}`} className="flex w-[96%] flex-grow *:w-[25%]">
+                <li>{startPostNumber + index}</li>
+                <li className="truncate">{item.user_post_rls.question}</li>
+                <li className="truncate">{item.comment}</li>
+                <li>{formatStrDate(item.updated_at)}</li>
+              </Link>
+              <Button variant="mypageClear" onClick={() => onDeletedComment(item.id)}>
+                <TrashIcon />
+              </Button>
+            </ol>
+          );
+        })
+      ) : (
+        <div className="h-full content-center text-center">새로운 댓글을 남겨주세요 📝</div>
+      )}
     </MyPageBoard>
   );
 }

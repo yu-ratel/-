@@ -10,5 +10,5 @@ export const getUserId = async () => {
   const supabase = await creatServer();
   const result = await supabase.auth.getUser();
 
-  return result.data.user?.id;
+  return result.data.user!.id;
 };
