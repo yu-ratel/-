@@ -15,7 +15,7 @@ const fetchData = async (page: number) => {
   const userId = await getUserId();
 
   const headers: HeadersInit = {
-    user_id: userId,
+    user_id: userId as string,
   };
 
   const response = await fetch(
