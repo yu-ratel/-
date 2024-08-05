@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-function middleware(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers);
+import creatServer from './lib/supabase/server';
 
-  const loginCookie = request.cookies.get('sb-rovcvqfcrtakgsbepdzj-auth-token-code-verifier');
-  requestHeaders.set('isUser', loginCookie ? 'true' : 'false');
+async function middleware(request: NextRequest) {
+  const requestHeaders = new Headers(request.headers);
+  const supabase = await creatServer();
+  const { data, error } = await supabase.auth.getSession();
+
+  requestHeaders.set('isUser', data.session ? 'true' : 'false');
+
+  if (error) request.headers.set('isUser', 'false');
 
   return NextResponse.next({
     request: {
