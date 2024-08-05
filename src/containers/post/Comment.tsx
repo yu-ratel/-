@@ -27,6 +27,7 @@ interface Props {
 function Comment({ data, postId, isLogin, userId }: Props) {
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [isAlert, setAlert] = useState(false);
   const { deletedComment } = useCommentController();
   const { onLoading } = useLoading();
   const { openToast } = useToast();
@@ -45,6 +46,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
   };
 
   const onDeletedComment = async (id: number) => {
+    setAlert(false);
     await onLoading(() => deletedComment(id));
     openToast('삭제가 완료되었습니다.');
   };
@@ -66,7 +68,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
                     <Button variant="update" onClick={() => onUpdate(comment.id)}>
                       <UpdatePen />
                     </Button>
-                    <Button variant="update" onClick={() => onDeletedComment(comment.id)}>
+                    <Button variant="update" onClick={() => setAlert(true)}>
                       <Clear />
                     </Button>
                   </>
@@ -76,6 +78,13 @@ function Comment({ data, postId, isLogin, userId }: Props) {
                     curId={comment.id}
                     comment={comment.comment}
                     closeCommentWindow={onClose}
+                  />
+                )}
+                {isAlert && (
+                  <AlertBox
+                    variant="delete"
+                    onClose={() => setAlert(false)}
+                    onClick={() => onDeletedComment(comment.id)}
                   />
                 )}
               </div>
