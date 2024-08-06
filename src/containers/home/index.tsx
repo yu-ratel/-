@@ -1,9 +1,21 @@
+'use client';
+
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 import ActiveLink from '@/components/ActiveLink';
 import Button from '@/components/Button';
 
 function Home() {
+  const isRedirected = useSearchParams().get('redirected');
+
+  useEffect(() => {
+    if (isRedirected) {
+      window.location.href = '/';
+    }
+  }, [isRedirected]);
+
   return (
     <main>
       <h1 className="m-10 text-4xl text-white">아름다움</h1>

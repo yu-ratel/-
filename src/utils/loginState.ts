@@ -7,7 +7,7 @@ export const loginState = () => {
 };
 
 export const getUserId = async () => {
-  const supabase = await creatServer();
+  const supabase = await creatServer(true);
   const result = await supabase.auth.getUser();
 
   return result.data.user?.id;
