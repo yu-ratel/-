@@ -83,11 +83,11 @@ function ForMe({ data, isLogin }: Props) {
   return (
     <main>
       <section>
-        <section className="flex">
+        <section className="flex max-md:flex-col-reverse max-md:items-center max-md:*:w-[90%]">
           <AskReply ref={askReplyRef} />
           <AskList onClick={handleAsk} data={data} />
         </section>
-        <section className=" text-center">
+        <section className=" text-center max-md:*:mb-3">
           <Button onClick={() => handleForme('submit')}>게시글 작성</Button>
           <Button onClick={() => handleForme('save')}>이미지 저장</Button>
           {isSave && <SaveFile title={title} reply={reply} onClose={onClose} />}

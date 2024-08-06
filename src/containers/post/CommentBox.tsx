@@ -50,7 +50,7 @@ function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
   };
 
   return (
-    <div className="border-gray-300 absolute bottom-3 right-[30px] h-[200px] w-[40%] overflow-hidden rounded border bg-braun p-2.5">
+    <div className="border-gray-300 absolute bottom-3 right-[30px] h-[200px] w-[40%] overflow-hidden rounded border bg-braun p-2.5 max-md:fixed max-md:w-[80%] ">
       <textarea
         ref={inputRef}
         className="mt-3 h-20 w-full resize-none rounded-xl p-2 focus:outline-none"
