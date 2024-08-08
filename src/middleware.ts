@@ -5,21 +5,21 @@ import createMiddleware from './lib/supabase/middleware';
 async function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   const supabase = createMiddleware(request);
-
   const {
-    data: { user },
+    data: { session },
     error,
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getSession();
 
-  if (user) {
+  if (session) {
     requestHeaders.set('isUser', 'true');
-  }
-  if (user && error?.status === 400) {
-    supabase.auth.signOut();
-    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/?redirected=true`);
+
+    if (error?.status === 400 || error?.status === 401) {
+      supabase.auth.signOut();
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/?redirected=true`);
+    }
   }
 
-  if (!user && request.nextUrl.pathname.startsWith('/mypage')) {
+  if (!session && request.nextUrl.pathname.startsWith('/mypage')) {
     return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/`);
   }
 
