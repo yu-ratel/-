@@ -6,15 +6,18 @@ import { useEffect } from 'react';
 
 import ActiveLink from '@/components/ActiveLink';
 import Button from '@/components/Button';
+import useToast from '@/hooks/useToast';
 
 function Home() {
   const isRedirected = useSearchParams().get('redirected');
+  const { openToast } = useToast();
 
   useEffect(() => {
     if (isRedirected) {
       window.location.href = '/';
+      openToast('다시 로그인 해주세요.');
     }
-  }, [isRedirected]);
+  }, [isRedirected, openToast]);
 
   return (
     <main>
