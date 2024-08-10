@@ -1,4 +1,11 @@
+import { Metadata } from 'next';
+
 import MyPageNav from '@/containers/mypage/MyPageNav';
+
+export const metadata: Metadata = {
+  title: 'myPage',
+  description: '나의 정보, 게시글, 댓글을 살펴보세요. 😀',
+};
 
 function MyPageLayout({
   children,

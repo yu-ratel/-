@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
+
 import Board from '@/containers/board';
 import { Database } from '@/types/supabase';
+
+export const metadata: Metadata = {
+  title: '우리들의 이야기',
+  description: '우리들의 이야기를 구경해봐요. 😀',
+};
 
 type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 
