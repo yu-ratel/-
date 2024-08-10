@@ -26,6 +26,7 @@ interface Props {
 function MyPost({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
   const [isAlert, setAlert] = useState(false);
+  const [curId, setCurId] = useState(0);
   const { deletePost } = usePostController();
   const { onLoading } = useLoading();
   const { openToast } = useToast();
@@ -34,6 +35,11 @@ function MyPost({ data, totalCount, limit, page }: Props) {
     setAlert(false);
     await onLoading(() => deletePost(id));
     openToast('삭제가 완료되었습니다.');
+  };
+
+  const openAlert = (id: number) => {
+    setAlert(true);
+    setCurId(id);
   };
 
   return (
@@ -48,14 +54,14 @@ function MyPost({ data, totalCount, limit, page }: Props) {
                 <li className="truncate">{item.replie}</li>
                 <li>{formatStrDate(item.updated_at)}</li>
               </Link>
-              <Button variant="mypageClear" onClick={() => setAlert(true)}>
+              <Button variant="mypageClear" onClick={() => openAlert(item.id)}>
                 <TrashIcon />
               </Button>
               {isAlert && (
                 <AlertBox
                   variant="delete"
                   onClose={() => setAlert(false)}
-                  onClick={() => onDelete(item.id)}
+                  onClick={() => onDelete(curId)}
                 />
               )}
             </ol>

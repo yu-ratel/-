@@ -28,6 +28,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isAlert, setAlert] = useState(false);
+  const [curId, setCurId] = useState(0);
   const { deletedComment } = useCommentController();
   const { onLoading } = useLoading();
   const { openToast } = useToast();
@@ -51,6 +52,11 @@ function Comment({ data, postId, isLogin, userId }: Props) {
     openToast('삭제가 완료되었습니다.');
   };
 
+  const openAlert = (id: number) => {
+    setAlert(true);
+    setCurId(id);
+  };
+
   return (
     <section className="ml-2 mr-10 mt-10 h-4/5 w-2/5 bg-white">
       <div className="h-4/5 overflow-auto">
@@ -68,7 +74,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
                     <Button variant="update" onClick={() => onUpdate(comment.id)}>
                       <UpdatePen />
                     </Button>
-                    <Button variant="update" onClick={() => setAlert(true)}>
+                    <Button variant="update" onClick={() => openAlert(comment.id)}>
                       <Clear />
                     </Button>
                   </>
@@ -84,7 +90,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
                   <AlertBox
                     variant="delete"
                     onClose={() => setAlert(false)}
-                    onClick={() => onDeletedComment(comment.id)}
+                    onClick={() => onDeletedComment(curId)}
                   />
                 )}
               </div>

@@ -30,6 +30,7 @@ interface Props {
 function MyComment({ data, totalCount, limit, page }: Props) {
   const startPostNumber = (page - 1) * limit + 1;
   const [isAlert, setAlert] = useState(false);
+  const [curId, setCurId] = useState(0);
   const { deletedComment } = useCommentController();
   const { onLoading } = useLoading();
   const { openToast } = useToast();
@@ -38,6 +39,11 @@ function MyComment({ data, totalCount, limit, page }: Props) {
     setAlert(false);
     await onLoading(() => deletedComment(id));
     openToast('삭제가 완료되었습니다.');
+  };
+
+  const openAlert = (id: number) => {
+    setAlert(true);
+    setCurId(id);
   };
 
   return (
@@ -52,14 +58,14 @@ function MyComment({ data, totalCount, limit, page }: Props) {
                 <li className="truncate">{item.comment}</li>
                 <li>{formatStrDate(item.updated_at)}</li>
               </Link>
-              <Button variant="mypageClear" onClick={() => setAlert(true)}>
+              <Button variant="mypageClear" onClick={() => openAlert(item.id)}>
                 <TrashIcon />
               </Button>
               {isAlert && (
                 <AlertBox
                   variant="delete"
                   onClose={() => setAlert(false)}
-                  onClick={() => onDeletedComment(item.id)}
+                  onClick={() => onDeletedComment(curId)}
                 />
               )}
             </ol>
