@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import MyPageNav from '@/containers/mypage/MyPageNav';
+import MyPage from '@/containers/mypage';
 
 export const metadata: Metadata = {
   title: 'myPage',
@@ -12,12 +12,7 @@ function MyPageLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <main className="h-[80%] px-10">
-      <MyPageNav />
-      <section className="h-4/5 rounded-xl bg-white">{children}</section>
-    </main>
-  );
+  return <MyPage>{children}</MyPage>;
 }
 
 export default MyPageLayout;

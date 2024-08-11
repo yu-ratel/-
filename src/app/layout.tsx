@@ -11,6 +11,7 @@ import '@/styles/globals.css';
 const notoSerifKr = Noto_Serif_KR({
   subsets: ['latin'],
   weight: '200',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
