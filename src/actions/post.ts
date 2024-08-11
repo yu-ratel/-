@@ -42,17 +42,10 @@ export const update = async (id: number, replie: string) => {
   return result.data;
 };
 
-export const softDelete = async (id: number) => {
+export const deleted = async (id: number) => {
   const supabase = await creatServer();
 
-  const result = await supabase
-    .from('user_post_rls')
-    .update({
-      deleted_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    })
-    .eq('id', id)
-    .select();
+  const result = await supabase.from('user_post_rls').delete().eq('id', id);
 
   onRevalidate(revalidateTag);
 

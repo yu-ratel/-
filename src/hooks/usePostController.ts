@@ -1,4 +1,4 @@
-import { create, softDelete, update } from '@/actions/post';
+import { create, deleted, update } from '@/actions/post';
 
 const usePostController = () => {
   const createPost = async (question: string, replie: string) => {
@@ -10,7 +10,7 @@ const usePostController = () => {
   };
 
   const deletePost = async (id: number) => {
-    await softDelete(id);
+    await deleted(id);
   };
 
   return {

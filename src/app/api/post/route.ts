@@ -11,7 +11,6 @@ export const GET = async (request: Request) => {
     .from('user_post_rls')
     .select('*, user_comment_rls (*)')
     .order('updated_at', { referencedTable: 'user_comment_rls', ascending: false })
-    .is('deleted_at', null)
     .eq('id', id)
     .single();
 
