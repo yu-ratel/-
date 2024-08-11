@@ -36,6 +36,11 @@ function PostBox({ postId, comment, closePostWindow }: Props) {
   };
 
   const onSubmit = async () => {
+    if (inputRef.current?.value === '') {
+      openToast('글을 입력해주세요.');
+      return;
+    }
+
     await onLoading(() => updatePost(postId, text));
     openToast('수정이 완료되었습니다.');
     closePostWindow();

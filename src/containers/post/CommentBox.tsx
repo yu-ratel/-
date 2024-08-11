@@ -37,6 +37,11 @@ function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
   };
 
   const onSubmit = async () => {
+    if (inputRef.current?.value === '') {
+      openToast('댓글을 입력해주세요.');
+      return;
+    }
+
     if (postId) {
       await onLoading(() => createComment(postId, text));
       openToast('작성이 완료되었습니다.');
