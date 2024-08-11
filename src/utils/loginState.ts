@@ -8,7 +8,7 @@ export const loginState = () => {
 
 export const getUserId = async () => {
   const supabase = await creatServer(true);
-  const result = await supabase.auth.getUser();
+  const result = await supabase.auth.getSession();
 
-  return result.data.user?.id;
+  return result.data.session?.user?.id;
 };
