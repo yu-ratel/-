@@ -100,7 +100,7 @@ function Comment({ data, postId, isLogin, userId }: Props) {
           <div className="m-10 text-center">소중한 댓글을 남겨주세요!</div>
         )}
       </div>
-      <div className="mt-6 flex justify-center">
+      <div className="mt-6 flex justify-center max-md:mt-0">
         <div className="flex w-4/5 items-center rounded-md  border border-[gray] p-1.5">
           <Pen className="mr-3 text-3xl" />
           <input
