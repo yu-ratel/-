@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import ActiveLink from '@/components/ActiveLink';
 import Pagination from '@/components/Pagination';
 import { Database } from '@/types/supabase';
 import { formatStrDate } from '@/utils/formatDate';
@@ -28,14 +27,14 @@ function Board({ data, totalCount, limit, page }: Props) {
         </ol>
         {data.map((item, index) => {
           return (
-            <Link href={`/post/${item.id}`} key={item.id}>
+            <ActiveLink path={`/post/${item.id}`} key={item.id} active={false}>
               <ol className="mb-3 flex h-[12%] items-center text-center *:my-1.5 *:w-[25%]">
                 <li>{startPostNumber + index}</li>
                 <li className="truncate">{item.question}</li>
                 <li>{item.nickname}</li>
                 <li>{formatStrDate(item.updated_at)}</li>
               </ol>
-            </Link>
+            </ActiveLink>
           );
         })}
       </section>

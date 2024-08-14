@@ -1,5 +1,6 @@
 import MyPost from '@/containers/mypage/post';
 import { Database } from '@/types/supabase';
+import { claerDelay } from '@/utils/delay';
 import { getUserId } from '@/utils/loginState';
 
 type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
@@ -30,6 +31,7 @@ const fetchData = async (page: number) => {
 };
 
 async function MyPostPage({ params }: { params: { page: number } }) {
+  claerDelay();
   const { data, totalCount, limit }: Props = await fetchData(params.page);
 
   return <MyPost data={data} totalCount={totalCount} limit={limit} page={params.page} />;

@@ -10,9 +10,10 @@ import { formatBasePath } from '@/utils/formatDate';
 interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   path: string;
   myPage?: boolean;
+  active?: boolean;
 }
 
-function ActiveLink({ path, myPage, children, ...props }: Props) {
+function ActiveLink({ path, myPage, children, active = true, ...props }: Props) {
   const router = usePathname();
   const { page } = useParams();
 
@@ -27,7 +28,12 @@ function ActiveLink({ path, myPage, children, ...props }: Props) {
   };
 
   return (
-    <Link href={path} className={isActive(path) ? 'text-white' : 'text-black'} {...props}>
+    <Link
+      href={path}
+      className={active && isActive(path) ? 'text-white' : 'text-black'}
+      prefetch={false}
+      {...props}
+    >
       {children}
     </Link>
   );

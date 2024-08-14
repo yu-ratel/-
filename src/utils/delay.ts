@@ -1,7 +1,13 @@
+let timer: NodeJS.Timeout | number;
+
 const asyncDelay = async () => {
   await new Promise((resolve) => {
-    setTimeout(resolve, 500);
+    timer = setTimeout(resolve, 500);
   });
 };
 
-export default asyncDelay;
+const claerDelay = () => {
+  clearTimeout(timer);
+};
+
+export { asyncDelay, claerDelay };

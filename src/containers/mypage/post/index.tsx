@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import { FaRegTrashCan as TrashIcon } from 'react-icons/fa6';
 
+import ActiveLink from '@/components/ActiveLink';
 import AlertBox from '@/components/AlertBox';
 import Button from '@/components/Button';
 import useLoading from '@/hooks/useLoading';
@@ -48,12 +48,16 @@ function MyPost({ data, totalCount, limit, page }: Props) {
         data.map((item, index) => {
           return (
             <ol key={item.id} className="mb-3 flex items-center text-center *:my-1.5">
-              <Link href={`/post/${item.id}`} className="flex w-[96%] flex-grow *:w-[25%]">
+              <ActiveLink
+                path={`/post/${item.id}`}
+                className="flex w-[96%] flex-grow *:w-[25%]"
+                active={false}
+              >
                 <li>{startPostNumber + index}</li>
                 <li className="truncate">{item.question}</li>
                 <li className="truncate">{item.replie}</li>
                 <li>{formatStrDate(item.updated_at)}</li>
-              </Link>
+              </ActiveLink>
               <Button variant="mypageClear" onClick={() => openAlert(item.id)}>
                 <TrashIcon />
               </Button>
