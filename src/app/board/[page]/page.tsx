@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 
 import Board from '@/containers/board';
 import { Database } from '@/types/supabase';
-import { claerDelay } from '@/utils/delay';
 
 export const metadata: Metadata = {
   title: '우리들의 이야기',
@@ -30,7 +29,6 @@ const fetchData = async (page: number) => {
 };
 
 async function BoardPage({ params }: { params: { page: number } }) {
-  claerDelay();
   const { data, totalCount, limit }: Props = await fetchData(params.page);
   return <Board data={data} totalCount={totalCount} limit={limit} page={params.page} />;
 }

@@ -1,8 +1,5 @@
-import { asyncDelay } from '@/utils/delay';
-
 async function Loading() {
   const commentStyle = 'm-5 h-[20%] rounded-md bg-gray max-md:h-[25%]';
-  await asyncDelay();
 
   return (
     <main className="h-[80%]">

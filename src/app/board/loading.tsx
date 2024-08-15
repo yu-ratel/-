@@ -1,9 +1,6 @@
 import SkeletonBoard from '@/components/SkeletonBoard';
-import { asyncDelay } from '@/utils/delay';
 
 async function Loading() {
-  await asyncDelay();
-
   return (
     <main className="h-[80%]">
       <div className="h-[8%]" />
