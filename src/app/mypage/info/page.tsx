@@ -1,6 +1,6 @@
 import Info from '@/containers/mypage/info';
 
-async function MyInfoPage() {
+function MyInfoPage() {
   return <Info />;
 }
 
