@@ -1,20 +1,10 @@
-import ActiveLink from '@/components/ActiveLink';
-import Pagination from '@/components/Pagination';
-import { Database } from '@/types/supabase';
-import { formatStrDate } from '@/utils/formatDate';
+import { Suspense } from 'react';
 
-type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
+import Loading from './Loading';
+import Posts from './Posts';
 
-interface Props {
-  data: BoardDto[];
-  totalCount: number;
-  limit: number;
-  page: number;
-}
-
-function Board({ data, totalCount, limit, page }: Props) {
+function Board({ page }: { page: number }) {
   const titles = ['번호', '제목', '글쓴이', '작성일'];
-  const startPostNumber = (page - 1) * limit + 1;
 
   return (
     <main className="h-[80%]">
@@ -25,21 +15,9 @@ function Board({ data, totalCount, limit, page }: Props) {
             return <li key={title}>{title}</li>;
           })}
         </ol>
-        {data.map((item, index) => {
-          return (
-            <ActiveLink path={`/post/${item.id}`} key={item.id} active={false}>
-              <ol className="mb-3 flex h-[12%] items-center text-center *:my-1.5 *:w-[25%]">
-                <li>{startPostNumber + index}</li>
-                <li className="truncate">{item.question}</li>
-                <li>{item.nickname}</li>
-                <li>{formatStrDate(item.updated_at)}</li>
-              </ol>
-            </ActiveLink>
-          );
-        })}
-      </section>
-      <section>
-        <Pagination totalCount={totalCount} limit={limit} />
+        <Suspense fallback={<Loading />}>
+          <Posts page={page} />
+        </Suspense>
       </section>
     </main>
   );
