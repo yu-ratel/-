@@ -1,6 +1,12 @@
-function SkeletonBoard({ count }: { count: number }) {
+interface Props {
+  count: number;
+  isMyPage?: boolean;
+}
+
+function SkeletonBoard({ count, isMyPage }: Props) {
   return (
     <>
+      {isMyPage && <div className="h-[10%] w-full bg-gray" />}
       {Array.from({ length: count }).map((_, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <ol className="flex *:m-6 *:h-5 *:animate-pulse *:rounded *:bg-gray" key={index}>
