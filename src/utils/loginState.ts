@@ -1,9 +1,11 @@
-import { headers } from 'next/headers';
+import { cookies } from 'next/headers';
 
 import creatServer from '@/lib/supabase/server';
 
 export const loginState = () => {
-  return headers().get('isUser') === 'true';
+  const getCookie = cookies().get('isUser');
+
+  return getCookie?.name === 'isUser' ? true : false;
 };
 
 export const getUserId = async () => {
@@ -11,4 +13,10 @@ export const getUserId = async () => {
   const result = await supabase.auth.getUser();
 
   return result.data.user?.id;
+};
+
+export const logoutWithCookiesDelete = async () => {
+  const supabase = await creatServer(true);
+
+  supabase.auth.signOut({});
 };

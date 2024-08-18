@@ -28,12 +28,7 @@ function ActiveLink({ path, myPage, children, active = true, ...props }: Props) 
   };
 
   return (
-    <Link
-      href={path}
-      className={active && isActive(path) ? 'text-white' : 'text-black'}
-      prefetch={false}
-      {...props}
-    >
+    <Link href={path} className={active && isActive(path) ? 'text-white' : 'text-black'} {...props}>
       {children}
     </Link>
   );
