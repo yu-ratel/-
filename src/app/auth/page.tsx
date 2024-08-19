@@ -1,10 +1,13 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import createClient from '@/lib/supabase/client';
 
 function Page() {
   // 추후 타 플랫폼 추가를 위해 일단은 kakao default
   const supabase = createClient();
+  const router = useRouter();
 
   const kakaoLogin = async () => {
     await supabase.auth.signInWithOAuth({
@@ -16,8 +19,7 @@ function Page() {
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
-    window.location.href = '/';
+    router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`);
   };
 
   const handler = async () => {

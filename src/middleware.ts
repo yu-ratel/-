@@ -38,8 +38,7 @@ async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/mypage')) {
     if (session) {
       if (error?.status === 400 || error?.status === 401) {
-        supabase.auth.signOut();
-        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/?redirected=true`);
+        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`);
       }
     }
 
