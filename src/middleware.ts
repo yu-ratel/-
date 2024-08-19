@@ -1,7 +1,7 @@
+import { RequestCookies, ResponseCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { NextRequest, NextResponse } from 'next/server';
 
 import createMiddleware from './lib/supabase/middleware';
-import { RequestCookies, ResponseCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 
 const loginRequest = (response: NextResponse, request: NextRequest) => {
   const setCookies = new ResponseCookies(request.headers);

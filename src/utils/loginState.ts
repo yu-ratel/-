@@ -5,7 +5,7 @@ import creatServer from '@/lib/supabase/server';
 export const loginState = () => {
   const getCookie = cookies().get('isUser');
 
-  return getCookie?.name === 'isUser' ? true : false;
+  return getCookie?.name === 'isUser';
 };
 
 export const getUserId = async () => {
