@@ -33,7 +33,7 @@ async function Posts({ page }: { page: number }) {
       <section className="h-full">
         {data.map((item, index) => {
           return (
-            <ActiveLink prefetch path={`/post/${item.id}`} key={item.id} active={false}>
+            <ActiveLink path={`/post/${item.id}`} key={item.id} active={false}>
               <ol className="mb-3 flex h-[12%] items-center text-center *:my-1.5 *:w-[25%]">
                 <li>{startPostNumber + index}</li>
                 <li className="truncate">{item.question}</li>

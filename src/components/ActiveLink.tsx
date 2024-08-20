@@ -11,10 +11,9 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   path: string;
   myPage?: boolean;
   active?: boolean;
-  prefetch?: boolean;
 }
 
-function ActiveLink({ path, myPage, children, active = true, prefetch = false, ...props }: Props) {
+function ActiveLink({ path, myPage, children, active = true, ...props }: Props) {
   const router = usePathname();
   const { page } = useParams();
 
@@ -31,7 +30,7 @@ function ActiveLink({ path, myPage, children, active = true, prefetch = false, .
   return (
     <Link
       href={path}
-      prefetch={prefetch}
+      prefetch
       className={active && isActive(path) ? 'text-white' : 'text-black'}
       {...props}
     >
