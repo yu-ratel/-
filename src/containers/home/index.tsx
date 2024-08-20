@@ -1,23 +1,28 @@
 'use client';
 
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import ActiveLink from '@/components/ActiveLink';
 import Button from '@/components/Button';
-import useToast from '@/hooks/useToast';
+import createClient from '@/lib/supabase/client';
 
 function Home() {
-  const isRedirected = useSearchParams().get('redirected');
-  const { openToast } = useToast();
+  const isLogin = useSearchParams().get('login');
+  const router = useRouter();
 
-  useEffect(() => {
-    if (isRedirected) {
-      window.location.href = '/';
-      openToast('다시 로그인 해주세요.');
-    }
-  }, [isRedirected, openToast]);
+  if (isLogin) {
+    const fetchUser = async () => {
+      const supabase = createClient();
+      const { data } = await supabase.auth.getUser();
+
+      if (data.user) {
+        localStorage.setItem('userId', data.user.id);
+      }
+      router.push('/');
+    };
+    fetchUser();
+  }
 
   return (
     <main>

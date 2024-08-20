@@ -21,14 +21,13 @@ interface Data extends BoardDto {
 
 interface Props {
   data: Data;
-  isLogin: boolean;
-  userId: string | undefined;
 }
 
-function Post({ data, isLogin, userId }: Props) {
+function Post({ data }: Props) {
   const [isUpdate, setUpdate] = useState(false);
   const [isSave, setSave] = useState(false);
   const { openToast } = useToast();
+  const userId = localStorage.getItem('userId');
 
   const onUpdate = () => {
     setUpdate(true);
@@ -77,7 +76,7 @@ function Post({ data, isLogin, userId }: Props) {
             <PostBox postId={data.id} comment={data.replie} closePostWindow={onUpdateClose} />
           )}
         </section>
-        <Comment data={data.user_comment_rls} postId={data.id} isLogin={isLogin} userId={userId} />
+        <Comment data={data.user_comment_rls} postId={data.id} userId={userId} />
       </section>
     </main>
   );

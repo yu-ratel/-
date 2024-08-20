@@ -1,6 +1,5 @@
 import Post from '@/containers/post';
 import { Database } from '@/types/supabase';
-import { loginState, getUserId } from '@/utils/loginState';
 
 type BoardDto = Database['public']['Tables']['user_post_rls']['Row'];
 type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
@@ -20,10 +19,8 @@ const fetchData = async (id: number) => {
 
 async function PostPage({ params }: { params: { id: number } }) {
   const data: Props = await fetchData(params.id);
-  const isLogin = loginState();
-  const userId = await getUserId();
 
-  return <Post data={data} isLogin={isLogin} userId={userId} />;
+  return <Post data={data} />;
 }
 
 export default PostPage;

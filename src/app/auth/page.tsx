@@ -22,8 +22,10 @@ function Page() {
   const handler = async () => {
     const result = await supabase.auth.getUser();
 
-    if (result?.data?.user) logout();
-    else kakaoLogin();
+    if (result?.data?.user) {
+      localStorage.removeItem('userId');
+      logout();
+    } else kakaoLogin();
   };
 
   handler();

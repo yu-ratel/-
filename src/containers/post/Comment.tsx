@@ -20,11 +20,10 @@ type CommentDto = Database['public']['Tables']['user_comment_rls']['Row'];
 interface Props {
   data: CommentDto[];
   postId: number;
-  isLogin: boolean;
-  userId: string | undefined;
+  userId: string | null;
 }
 
-function Comment({ data, postId, isLogin, userId }: Props) {
+function Comment({ data, postId, userId }: Props) {
   const [isCommentWindow, setCommentWindow] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isAlert, setAlert] = useState(false);
@@ -109,10 +108,8 @@ function Comment({ data, postId, isLogin, userId }: Props) {
             placeholder="댓글을 작성해보세요."
             onClick={onCommentWindow}
           />
-          {isCommentWindow && isLogin && (
-            <CommentBox postId={postId} closeCommentWindow={onClose} />
-          )}
-          {isCommentWindow && !isLogin && <AlertBox onClose={onClose} />}
+          {isCommentWindow && userId && <CommentBox postId={postId} closeCommentWindow={onClose} />}
+          {isCommentWindow && !userId && <AlertBox onClose={onClose} />}
         </div>
       </div>
     </section>
