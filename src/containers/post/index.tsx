@@ -55,7 +55,9 @@ function Post({ data, isLogin, userId }: Props) {
       <section className="flex h-full max-md:flex-col max-md:items-center max-md:*:m-3 max-md:*:w-[90%] max-md:*:rounded-lg">
         <section className="ml-10 mt-10 h-4/5 w-3/5 bg-white *:m-5 max-md:m-0">
           <h2 className="flex justify-between text-2xl max-md:justify-center">{data.question}</h2>
-          <p className="h-[70%] max-md:h-[60%] max-md:text-center">{data.replie}</p>
+          <p className="h-[70%] overflow-auto whitespace-pre-line max-md:h-[60%] max-md:text-center">
+            {data.replie}
+          </p>
           <div className="text-center">
             {userId === data.user_id && (
               <div className="flex justify-evenly">
