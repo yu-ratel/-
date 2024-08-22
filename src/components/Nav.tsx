@@ -2,7 +2,7 @@ import { loginState } from '@/utils/loginState';
 
 import ActiveLink from './ActiveLink';
 
-function Nav() {
+async function Nav() {
   const isUser = loginState();
   const loginText = isUser ? '로그아웃' : '로그인';
 
@@ -16,7 +16,7 @@ function Nav() {
             마이페이지
           </ActiveLink>
         )}
-        <ActiveLink path={`/auth?${isUser}`}>{loginText}</ActiveLink>
+        <ActiveLink path={`/auth?login=${isUser}`}>{loginText}</ActiveLink>
       </div>
     </nav>
   );

@@ -11,7 +11,7 @@ function Home() {
   const isLogin = useSearchParams().get('login');
   const router = useRouter();
 
-  if (isLogin) {
+  if (isLogin === 'true') {
     const fetchUser = async () => {
       const supabase = createClient();
       const { data } = await supabase.auth.getUser();
