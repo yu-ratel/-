@@ -1,12 +1,12 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { CgSpinner as Spinner } from 'react-icons/cg';
 import { MdOutlineClear as Clear } from 'react-icons/md';
 
 import ActiveLink from '@/components/ActiveLink';
 import Button from '@/components/Button';
 import createClient from '@/lib/supabase/client';
-import { useSearchParams } from 'next/navigation';
 
 function Auth() {
   const supabase = createClient();
