@@ -1,29 +1,24 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
 import { BsPencil as UpdatePen } from 'react-icons/bs';
 
 import Button from '@/components/Button';
+import { Database } from '@/types/supabase';
 
-import lottieCookieJson from '../../../../public/Lottie/cookie.json';
+import FortuneCookie from './FortuneCookie';
 
-const Lottie = dynamic(() => import('react-lottie-player'), {
-  ssr: false,
-});
+type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
 
-function Info() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isText, setText] = useState(false);
+interface Props {
+  data: FortuneCookieDto[];
+}
 
-  const text = '오늘 하루 기운이 좋은걸요?';
+const fetchData = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fortuneCookie`);
 
-  const onClick = () => {
-    setIsOpen(true);
-    setTimeout(() => {
-      setText(true);
-    }, 2000);
-  };
+  return response.json();
+};
+
+async function Info() {
+  const { data }: Props = await fetchData();
 
   return (
     <div className="h-full rounded-xl bg-white p-10 *:text-center">
@@ -35,16 +30,7 @@ function Info() {
           <UpdatePen />
         </Button>
       </section>
-      <section className="h-1/5">행운의 포춘쿠키를 눌러 보세요! 😀</section>
-      <Button className="flex w-full justify-center" variant="save" onClick={() => onClick()}>
-        <Lottie
-          className={`h-auto w-auto ${!isOpen ? 'animate-bounce' : ''}`}
-          animationData={lottieCookieJson}
-          play={isOpen}
-          loop={false}
-        />
-      </Button>
-      {isText && <div>{text}</div>}
+      <FortuneCookie data={data} />
     </div>
   );
 }
