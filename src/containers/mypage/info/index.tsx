@@ -1,9 +1,7 @@
-import { BsPencil as UpdatePen } from 'react-icons/bs';
-
-import Button from '@/components/Button';
 import { Database } from '@/types/supabase';
 
 import FortuneCookie from './FortuneCookie';
+import NickName from './NickName';
 
 type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
 
@@ -25,12 +23,7 @@ async function Info() {
   return (
     <div className="h-full rounded-xl bg-white p-10 *:text-center">
       <section className="flex h-1/5 items-center justify-center text-xl">
-        <div>
-          안녕하세요, <span className="text-2xl text-deepBraun">이이이이이이</span>님
-        </div>
-        <Button variant="update">
-          <UpdatePen />
-        </Button>
+        <NickName />
       </section>
       <FortuneCookie data={data} />
     </div>
