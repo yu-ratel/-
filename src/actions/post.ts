@@ -7,16 +7,12 @@ const revalidateTag = 'board';
 
 export const create = async (question: string, replie: string) => {
   const supabase = await creatServer();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   const result = await supabase
     .from('user_post_rls')
     .insert({
       question,
       replie,
-      nickname: user?.user_metadata.name,
     })
     .select();
 

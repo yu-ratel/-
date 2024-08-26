@@ -7,16 +7,12 @@ const revalidateTag = 'post';
 
 export const create = async (postId: number, comment: string) => {
   const supabase = await creatServer();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   const result = await supabase
     .from('user_comment_rls')
     .insert({
       post_id: postId,
       comment,
-      nickname: user?.user_metadata.name,
     })
     .select();
 
