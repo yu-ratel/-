@@ -12,7 +12,9 @@ interface Props {
 }
 
 const fetchData = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fortuneCookie`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fortuneCookie`, {
+    cache: 'no-cache',
+  });
 
   return response.json();
 };
