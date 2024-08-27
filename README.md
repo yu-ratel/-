@@ -9,7 +9,7 @@
 
 ### ⚙️ 기술 스택
 
-TypeScript, React, Next, Tailwind, Supabase,
+TypeScript, React, Next, Tailwind, Supabase, Context Api
 
 ---
 
