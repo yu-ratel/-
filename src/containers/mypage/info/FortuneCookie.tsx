@@ -11,7 +11,7 @@ import lottieCookieJson from '../../../../public/Lottie/cookie.json';
 type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
 
 interface Props {
-  data: FortuneCookieDto[];
+  data: FortuneCookieDto;
 }
 
 const Lottie = dynamic(() => import('react-lottie-player'), {
@@ -40,7 +40,7 @@ function FortuneCookie({ data }: Props) {
           loop={false}
         />
       </Button>
-      {isText && <div>{data[0].text}</div>}
+      {isText && <div>{data.text}</div>}
     </>
   );
 }

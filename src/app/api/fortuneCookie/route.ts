@@ -9,7 +9,11 @@ export const GET = async () => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   // 현재 쿠키 개수 min, max 설정
-  const result = await supabase.from('fortune_cookie').select('*').eq('id', getRandomNumber(2, 79));
+  const result = await supabase
+    .from('fortune_cookie')
+    .select('*')
+    .eq('id', getRandomNumber(2, 79))
+    .single();
 
   return NextResponse.json({ ...result });
 };

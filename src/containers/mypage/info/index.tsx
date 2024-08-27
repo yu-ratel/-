@@ -6,7 +6,7 @@ import NickName from './NickName';
 type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
 
 interface Props {
-  data: FortuneCookieDto[];
+  data: FortuneCookieDto;
 }
 
 const fetchData = async () => {
