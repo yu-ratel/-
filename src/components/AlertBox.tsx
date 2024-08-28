@@ -16,7 +16,7 @@ function AlertBox({ variant = 'login', onClose, onClick }: Props) {
       title: '로그인이 필요해요.',
       text: '나의 이야기를 공유하고 간직해봐요.',
       access: '로그인',
-      link: '/auth',
+      link: '/auth?login=false',
     },
     delete: {
       title: '삭제 하시겠습니까?',
