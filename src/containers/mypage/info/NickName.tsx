@@ -20,6 +20,7 @@ const profileFetchData = async (userId: string | null) => {
 
 function NickName() {
   const [nickName, setNickName] = useState('');
+  const [isGuest, setGuest] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -28,6 +29,10 @@ function NickName() {
 
       if (userId === null) {
         window.location.replace(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`);
+      }
+
+      if (userId === 'aa3156f1-cab6-4045-abe2-0e755287190f') {
+        setGuest(true);
       }
 
       if (data.name) {
@@ -43,9 +48,11 @@ function NickName() {
       <div>
         안녕하세요, <span className="text-2xl text-deepBraun">{nickName}</span>님
       </div>
-      <Button variant="update">
-        <UpdatePen />
-      </Button>
+      {!isGuest && (
+        <Button variant="update">
+          <UpdatePen />
+        </Button>
+      )}
     </>
   );
 }
