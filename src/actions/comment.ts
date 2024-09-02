@@ -11,12 +11,14 @@ export const create = async (postId: number, comment: string) => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const data = await supabase.from('profiles').select('name').eq('id', user!.id).single();
+
   const result = await supabase
     .from('user_comment_rls')
     .insert({
       post_id: postId,
       comment,
-      nickname: user?.user_metadata.name,
+      nickname: data.data?.name as string,
     })
     .select();
 

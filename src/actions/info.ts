@@ -2,7 +2,7 @@
 
 import creatServer from '@/lib/supabase/server';
 
-const update = async (id: number, name: string) => {
+const update = async (id: string, name: string) => {
   const supabase = await creatServer();
 
   const result = await supabase
