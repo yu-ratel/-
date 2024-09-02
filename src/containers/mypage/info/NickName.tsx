@@ -6,6 +6,8 @@ import { BsPencil as UpdatePen } from 'react-icons/bs';
 import Button from '@/components/Button';
 import { Database } from '@/types/supabase';
 
+import NicknameBox from './NickNamebox';
+
 type ProfileDto = Database['public']['Tables']['profiles']['Row'];
 
 interface Props {
@@ -18,9 +20,10 @@ const profileFetchData = async (userId: string | null) => {
   return response.json();
 };
 
-function NickName() {
-  const [nickName, setNickName] = useState('');
+function Nickname() {
+  const [nickname, setNickname] = useState('');
   const [isGuest, setGuest] = useState(false);
+  const [isUpdate, setUpdate] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -36,7 +39,7 @@ function NickName() {
       }
 
       if (data.name) {
-        setNickName(data.name);
+        setNickname(data.name);
       }
     };
 
@@ -46,15 +49,16 @@ function NickName() {
   return (
     <>
       <div>
-        안녕하세요, <span className="text-2xl text-deepBraun">{nickName}</span>님
+        안녕하세요, <span className="text-2xl text-deepBraun">{nickname}</span>님
       </div>
       {!isGuest && (
-        <Button variant="update">
+        <Button variant="update" onClick={() => setUpdate(true)}>
           <UpdatePen />
         </Button>
       )}
+      {isUpdate && <NicknameBox nickname={nickname} closeCommentWindow={() => setUpdate(false)} />}
     </>
   );
 }
 
-export default NickName;
+export default Nickname;

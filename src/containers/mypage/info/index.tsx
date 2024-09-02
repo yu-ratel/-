@@ -1,7 +1,7 @@
 import { Database } from '@/types/supabase';
 
 import FortuneCookie from './FortuneCookie';
-import NickName from './NickName';
+import Nickname from './Nickname';
 
 type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
 
@@ -23,7 +23,7 @@ async function Info() {
   return (
     <div className="h-full rounded-xl bg-white p-10 *:text-center">
       <section className="flex h-1/5 items-center justify-center text-xl">
-        <NickName />
+        <Nickname />
       </section>
       <FortuneCookie data={data} />
     </div>
