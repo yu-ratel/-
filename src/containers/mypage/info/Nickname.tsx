@@ -5,7 +5,7 @@ import { BsPencil as UpdatePen } from 'react-icons/bs';
 
 import Button from '@/components/Button';
 
-import NicknameBox from './NickNamebox';
+import NicknameBox from './Nicknamebox';
 
 function Nickname({ name }: { name: string | null }) {
   const [isGuest, setGuest] = useState(false);

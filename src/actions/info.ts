@@ -3,7 +3,7 @@
 import creatServer from '@/lib/supabase/server';
 import onRevalidate from '@/utils/revalidate';
 
-const revalidateTag = 'info';
+const revalidateTags = ['info', 'post', 'board'];
 
 const update = async (id: string, name: string) => {
   const supabase = await creatServer();
@@ -16,7 +16,9 @@ const update = async (id: string, name: string) => {
     .eq('id', id)
     .select();
 
-  onRevalidate(revalidateTag);
+  revalidateTags.map((tag) => {
+    return onRevalidate(tag);
+  });
 
   return result.data;
 };
