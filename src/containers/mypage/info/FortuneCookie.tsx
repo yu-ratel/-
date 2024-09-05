@@ -4,21 +4,14 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import Button from '@/components/Button';
-import { Database } from '@/types/supabase';
 
 import lottieCookieJson from '../../../../public/Lottie/cookie.json';
-
-type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
-
-interface Props {
-  data: FortuneCookieDto;
-}
 
 const Lottie = dynamic(() => import('react-lottie-player'), {
   ssr: false,
 });
 
-function FortuneCookie({ data }: Props) {
+function FortuneCookie({ text }: { text: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isText, setText] = useState(false);
 
@@ -40,7 +33,7 @@ function FortuneCookie({ data }: Props) {
           loop={false}
         />
       </Button>
-      {isText && <div>{data.text}</div>}
+      {isText && <div>{text}</div>}
     </>
   );
 }

@@ -8,7 +8,7 @@ import useLoading from '@/hooks/useLoading';
 import useToast from '@/hooks/useToast';
 
 interface Props {
-  nickname?: string;
+  nickname?: string | null;
   closeCommentWindow: () => void;
 }
 function NicknameBox({ nickname, closeCommentWindow }: Props) {
@@ -49,7 +49,6 @@ function NicknameBox({ nickname, closeCommentWindow }: Props) {
     await onLoading(() => updateNickname());
     openToast('수정이 완료되었습니다.');
 
-    window.location.reload();
     setName('');
     closeCommentWindow();
   };

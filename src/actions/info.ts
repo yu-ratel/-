@@ -1,6 +1,9 @@
 'use server';
 
 import creatServer from '@/lib/supabase/server';
+import onRevalidate from '@/utils/revalidate';
+
+const revalidateTag = 'info';
 
 const update = async (id: string, name: string) => {
   const supabase = await creatServer();
@@ -12,6 +15,8 @@ const update = async (id: string, name: string) => {
     })
     .eq('id', id)
     .select();
+
+  onRevalidate(revalidateTag);
 
   return result.data;
 };

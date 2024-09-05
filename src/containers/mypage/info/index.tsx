@@ -1,15 +1,18 @@
 import { Database } from '@/types/supabase';
+import { getUserId } from '@/utils/loginState';
 
 import FortuneCookie from './FortuneCookie';
 import Nickname from './Nickname';
 
-type FortuneCookieDto = Database['public']['Tables']['fortune_cookie']['Row'];
+type ProfileDto = {
+  data: Database['public']['Tables']['profiles']['Row'];
+};
 
-interface Props {
-  data: FortuneCookieDto;
-}
+type FortuneCookieDto = {
+  data: Database['public']['Tables']['fortune_cookie']['Row'];
+};
 
-const fetchData = async () => {
+const fetchFortuneCookie = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fortuneCookie`, {
     cache: 'no-cache',
   });
@@ -17,15 +20,25 @@ const fetchData = async () => {
   return response.json();
 };
 
+const fetchNickname = async () => {
+  const userId = await getUserId();
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/profile?id=${userId}`, {
+    next: { tags: ['info'] },
+  });
+
+  return response.json();
+};
+
 async function Info() {
-  const { data }: Props = await fetchData();
+  const { data: nickname }: ProfileDto = await fetchNickname();
+  const { data: fortuneCookie }: FortuneCookieDto = await fetchFortuneCookie();
 
   return (
     <div className="h-full rounded-xl bg-white p-10 *:text-center">
       <section className="flex h-1/5 items-center justify-center text-xl">
-        <Nickname />
+        <Nickname name={nickname.name} />
       </section>
-      <FortuneCookie data={data} />
+      <FortuneCookie text={fortuneCookie.text} />
     </div>
   );
 }
