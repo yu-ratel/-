@@ -28,7 +28,7 @@ function Nickname({ name }: { name: string | null }) {
       <div>
         안녕하세요, <span className="text-2xl text-deepBraun">{name}</span>님
       </div>
-      {isGuest && (
+      {!isGuest && (
         <Button variant="update" onClick={() => setUpdate(true)}>
           <UpdatePen />
         </Button>
