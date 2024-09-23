@@ -21,16 +21,21 @@ function ToastContextProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
   const toastIdRef = useRef(0);
 
-  const openToast = useCallback((message: string) => {
-    // eslint-disable-next-line no-plusplus
-    const id = toastIdRef.current++;
-    const newToast = { id, message };
-    setToasts((prev) => [...prev, newToast]);
+  const openToast = useCallback(
+    (message: string) => {
+      if (toasts.length < 2) {
+        // eslint-disable-next-line no-plusplus
+        const id = toastIdRef.current++;
+        const newToast = { id, message };
+        setToasts((prev) => [...prev, newToast]);
 
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
-    }, 3000);
-  }, []);
+        setTimeout(() => {
+          setToasts((prev) => prev.filter((toast) => toast.id !== id));
+        }, 3000);
+      }
+    },
+    [toasts],
+  );
 
   const value = useMemo(() => ({ openToast }), [openToast]);
 
