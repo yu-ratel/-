@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Database } from '@/types/supabase';
 
 type AskDto = Database['public']['Tables']['question']['Row'];
@@ -31,4 +33,4 @@ function AskList({ data, onClick }: Props) {
   );
 }
 
-export default AskList;
+export default React.memo(AskList);

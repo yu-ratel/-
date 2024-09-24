@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 
 import { formatToday } from '@/utils/formatDate';
 
@@ -41,4 +41,4 @@ const AskReply = forwardRef((_, ref) => {
 
 AskReply.displayName = 'AskReply';
 
-export default AskReply;
+export default React.memo(AskReply);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import AlertBox from '@/components/AlertBox';
 import Button from '@/components/Button';
@@ -37,13 +37,11 @@ function ForMe({ data, isLogin }: Props) {
     setSave(false);
   };
 
-  const handleAsk = (ask: string) => {
+  const handleAsk = useCallback((ask: string) => {
     if (askReplyRef.current) {
       askReplyRef.current.askClick(ask);
     }
-
-    return null;
-  };
+  }, []);
 
   const handleSubmit = (curTitle: string, curReply: string) => {
     openToast('작성이 완료되었습니다.');
