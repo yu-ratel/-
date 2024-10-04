@@ -6,13 +6,11 @@ import { MdOutlineClear as Clear } from 'react-icons/md';
 
 import ActiveLink from '@/components/ActiveLink';
 import Button from '@/components/Button';
-import useToast from '@/hooks/useToast';
 import createClient from '@/lib/supabase/client';
 
 function Auth() {
   const supabase = createClient();
   const isLogin = useSearchParams().get('login');
-  const { openToast } = useToast();
 
   const kakaoLogin = async () => {
     await supabase.auth.signInWithOAuth({
@@ -24,8 +22,6 @@ function Auth() {
   };
 
   const login = async () => {
-    openToast('서비스 오류로 인해 일시중지 되었습니다. 카카오 로그인을 이용해주세요.');
-    /*
     const { data } = await supabase.auth.signInWithPassword({
       email: 'dbdudals100@gmail.com',
       password: 'aaaaaa',
@@ -36,7 +32,6 @@ function Auth() {
     window.location.replace(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`);
 
     return data;
-    */
   };
 
   const logout = async () => {
