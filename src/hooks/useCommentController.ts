@@ -1,8 +1,13 @@
 import { create, update, deleted } from '@/actions/comment';
+import errorHandler from '@/utils/errorHandler';
 
 const useCommentController = () => {
   const createComment = async (id: number, comment: string) => {
-    await create(id, comment);
+    try {
+      await create(id, comment);
+    } catch (error) {
+      errorHandler();
+    }
   };
 
   const updateComment = async (id: number, comment: string) => {

@@ -46,6 +46,7 @@ function CommentBox({ postId, curId, comment, closeCommentWindow }: Props) {
       await onLoading(() => createComment(postId, text));
       openToast('작성이 완료되었습니다.');
     }
+
     if (curId) {
       await onLoading(() => updateComment(curId, text));
       openToast('수정이 완료되었습니다.');
