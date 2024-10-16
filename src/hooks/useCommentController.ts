@@ -3,7 +3,7 @@ import errorHandler from '@/utils/errorHandler';
 
 const useCommentController = () => {
   const createComment = (id: number, comment: string) => {
-    errorHandler(create(id, comment));
+    return errorHandler(create(id, comment));
   };
 
   const updateComment = async (id: number, comment: string) => {
