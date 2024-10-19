@@ -7,11 +7,11 @@ const useCommentController = () => {
   };
 
   const updateComment = async (id: number, comment: string) => {
-    await update(id, comment);
+    return errorHandler(update(id, comment));
   };
 
   const deletedComment = async (id: number) => {
-    await deleted(id);
+    return errorHandler(deleted(id));
   };
 
   return {

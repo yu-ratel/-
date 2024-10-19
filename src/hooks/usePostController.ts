@@ -1,16 +1,17 @@
 import { create, deleted, update } from '@/actions/post';
+import errorHandler from '@/utils/errorHandler';
 
 const usePostController = () => {
   const createPost = async (question: string, replie: string) => {
-    await create(question, replie);
+    return errorHandler(create(question, replie));
   };
 
   const updatePost = async (id: number, replie: string) => {
-    await update(id, replie);
+    return errorHandler(update(id, replie));
   };
 
   const deletePost = async (id: number) => {
-    await deleted(id);
+    return errorHandler(deleted(id));
   };
 
   return {
