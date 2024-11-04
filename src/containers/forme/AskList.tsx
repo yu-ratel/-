@@ -12,9 +12,9 @@ interface Props {
 function AskList({ data, onClick }: Props) {
   return (
     <section className="m-10 grid h-[28rem] w-[30rem] overflow-auto bg-white">
-      <h1 className="h-[5.5rem] content-center bg-deepBraun text-center text-white">
+      <h3 className="h-[5.5rem] content-center bg-deepBraun text-center text-white">
         나를 알아가보세요.
-      </h1>
+      </h3>
       <div className="overflow-auto p-2">
         {data.map((item) => {
           return (
