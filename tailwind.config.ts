@@ -14,6 +14,11 @@ const config: Config = {
       deepBraun: '#BFA989',
       black: '#000000',
     },
+    extend: {
+      screens: {
+        sm: '480px',
+      },
+    },
   },
   plugins: [],
 };

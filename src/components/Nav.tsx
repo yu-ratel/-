@@ -9,7 +9,7 @@ async function Nav() {
   return (
     <nav className="m-6 flex h-[10%] justify-between">
       <ActiveLink path="/">아름다움</ActiveLink>
-      <div className="*:m-6">
+      <div className="flex space-x-3 sm:space-x-10">
         <ActiveLink path="/board/1">게시판</ActiveLink>
         {isUser && (
           <ActiveLink path="/mypage/info" myPage>
