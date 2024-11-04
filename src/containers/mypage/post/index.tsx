@@ -47,16 +47,19 @@ function MyPost({ data, totalCount, limit, page }: Props) {
       {data.length ? (
         data.map((item, index) => {
           return (
-            <ol key={item.id} className="mb-3 flex items-center text-center *:my-1.5">
+            <ol
+              key={item.id}
+              className="mb-3 flex items-center text-center *:my-1.5  max-md:w-[95%] max-md:*:text-sm"
+            >
               <ActiveLink
                 path={`/post/${item.id}`}
-                className="flex w-[96%] flex-grow *:w-[25%]"
+                className="flex w-[95%] flex-grow *:mr-3 *:w-[25%] max-md:*:w-[30%]"
                 active={false}
               >
                 <li>{startPostNumber + index}</li>
                 <li className="truncate">{item.question}</li>
                 <li className="truncate">{item.replie}</li>
-                <li>{formatStrDate(item.updated_at)}</li>
+                <li className="hidden md:block">{formatStrDate(item.updated_at)}</li>
               </ActiveLink>
               <Button variant="mypageClear" onClick={() => openAlert(item.id)}>
                 <TrashIcon />
