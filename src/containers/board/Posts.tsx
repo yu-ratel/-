@@ -34,11 +34,11 @@ async function Posts({ page }: { page: number }) {
         {data.map((item, index) => {
           return (
             <ActiveLink path={`/post/${item.id}`} key={item.id} active={false}>
-              <ol className="mb-3 flex h-[12%] items-center text-center *:my-1.5 *:w-[25%]">
+              <ol className="mb-3 flex h-[12%] items-center text-center *:my-1.5 *:w-[25%] max-md:*:w-[35%]">
                 <li>{startPostNumber + index}</li>
                 <li className="truncate">{item.question}</li>
                 <li>{item.nickname}</li>
-                <li>{formatStrDate(item.updated_at)}</li>
+                <li className="hidden md:block">{formatStrDate(item.updated_at)}</li>
               </ol>
             </ActiveLink>
           );
