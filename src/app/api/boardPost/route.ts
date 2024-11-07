@@ -19,7 +19,7 @@ export const GET = async (request: Request) => {
   const data = await supabase
     .from('user_post_rls')
     .select('*')
-    .order('updated_at', { ascending: false })
+    .order('created_at', { ascending: false })
     .range(startNum, endNum);
 
   return NextResponse.json({ totalCount: totalCount.count, ...data, limit });
